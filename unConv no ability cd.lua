@@ -1,7 +1,8 @@
 local LP = game:GetService("Players").LocalPlayer;
+local abilities = require(game:GetService("ReplicatedStorage").Info).Abilities;
 local a = {};
 local n = 0;
-for k, v in pairs(require(game:GetService("ReplicatedStorage").Info).Abilities) do
+for k, v in pairs(abilities) do
     n = n + 1;
     a[n] = k;
 end
@@ -9,14 +10,19 @@ local playerAbility;
 for k, v in pairs(a) do
     if LP:FindFirstChild(tostring(v)) then playerAbility = LP[tostring(v)] end;
 end
-_G.toggle = true; --Comment out the rest of the code, set this to false and execute if u want to turn it off
-
-while wait() do
-    if _G.toggle then
-        if playerAbility:FindFirstChild("1") then
-            playerAbility:FindFirstChild("1"):Destroy();
-        elseif playerAbility:FindFirstChild("2") then
-            playerAbility:FindFirstChild("2"):Destroy();
-        end
+local abilityCount;
+for k, v in pairs(abilities) do
+    if k == tostring(playerAbility) then
+        abilityCount = #v.Skills;
     end
+end
+
+for i=1, abilityCount do
+    spawn(function()
+        while wait() do
+            if playerAbility:FindFirstChild(tostring(i)) then
+                playerAbility:FindFirstChild(tostring(i)):Destroy();
+            end
+        end
+    end) 
 end
