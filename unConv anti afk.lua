@@ -5,8 +5,6 @@ for _, v in pairs(getconnections(LP.Idled)) do
     v:Disable(); 
 end
 
-LP:WaitForChild("PlayerScripts"):WaitForChild("gaming"):Destroy();
-
 while wait() do
     if LP.PlayerGui.ScreenGui.AntiAFK.Visible then
         UnAFK:FireServer(10);
