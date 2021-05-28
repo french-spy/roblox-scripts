@@ -1,9 +1,12 @@
 local LP = game:GetService("Players").LocalPlayer;
+local VU = game:GetService("VirtualUser");
 local UnAFK = game:GetService("ReplicatedStorage").UnAFK;
 
-for _, v in pairs(getconnections(LP.Idled)) do
-    v:Disable(); 
-end
+LP.Idled:Connect(function()
+    VU:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame);
+    wait(1);
+    VU:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame);
+end)
 
 while wait() do
     if LP.PlayerGui.ScreenGui.AntiAFK.Visible then
