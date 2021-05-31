@@ -20,6 +20,8 @@ if game.PlaceId == 5941294866 then
         CFrame.new(3299.20361, 856.921875, -4228.13867, -0.442789942, -5.96011996e-05, 0.896625221, -9.65894797e-05, 1, 1.87729765e-05, -0.896625221, -7.82920833e-05, -0.442789942)
     };
     
+    grabTrinket();
+	
     local PlaceID = game.PlaceId
     local AllIDs = {}
     local foundAnything = ""
