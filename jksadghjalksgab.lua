@@ -19,8 +19,6 @@ if game.PlaceId == 5941294866 then
         CFrame.new(3280.61987, 856.921875, -4233.31104, -0.941858172, 1.27430928e-08, -0.336010695, 3.11341033e-08, 1, -4.93460988e-08, 0.336010695, -5.69384149e-08, -0.941858172),
         CFrame.new(3299.20361, 856.921875, -4228.13867, -0.442789942, -5.96011996e-05, 0.896625221, -9.65894797e-05, 1, 1.87729765e-05, -0.896625221, -7.82920833e-05, -0.442789942)
     };
-    
-    grabTrinket();
 	
     local PlaceID = game.PlaceId
     local AllIDs = {}
@@ -126,14 +124,18 @@ if game.PlaceId == 5941294866 then
     end
     
 	print("AAAA")
-    for i,v in pairs(coords) do
-        for i = 1, 2 do
-			for i2,v2 in pairs(v) do
-				HRP.CFrame = v2;
-				if i2 == 1 then wait(5) else wait(0.3); end
-				grabTrinket();
+	grabTrinket();
+    pcall(function()
+	for i,v in pairs(coords) do
+		for i = 1, 2 do
+				for i2,v2 in pairs(v) do
+					HRP.CFrame = v2;
+					if i2 == 1 then wait(5) else wait(0.3); end
+					grabTrinket();
+				end
 			end
-		end
-    end
+	    end		
+    end)
+    
     Teleport();
 end
