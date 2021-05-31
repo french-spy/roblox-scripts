@@ -128,7 +128,7 @@ if game.PlaceId == 5941294866 then
         for i = 1, 2 do
 			for i2,v2 in pairs(v) do
 				HRP.CFrame = v2;
-				if i2 == 1 then wait(7) else wait(0.3); end
+				if i2 == 1 then wait(5) else wait(0.3); end
 				grabTrinket();
 			end
 		end
