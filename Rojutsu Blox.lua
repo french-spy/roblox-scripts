@@ -42,7 +42,7 @@ spawn(function()
                         for k,v in pairs(quests) do
                             if v == quest then
                                 oldPos = LP.Character.HumanoidRootPart.CFrame;
-                                LP.Character.HumanoidRootPart.CFrame = k.Interact.CFrame;
+                                LP.Character.HumanoidRootPart.CFrame = k.Interact.CFrame * CFrame.new(0, -10, 0);
                                 fireproximityprompt(k.Interact.ProximityPrompt);
                                 wait(0.3);
                                 LP.Character.HumanoidRootPart.CFrame = oldPos
