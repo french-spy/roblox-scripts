@@ -4,6 +4,7 @@ local quests = {};
 local oldPos = 0;
 quest = "";
 autoQuest = false;
+infMana = false;
 
 local function getVals(t)
     if type(t) ~= "table" then return nil; end
@@ -32,6 +33,9 @@ end)
 b:addToggle("Auto Quest", nil, function(v)
     autoQuest = v;
 end)
+b:addToggle("Inf Mana", nil, function(v)
+    infMana = v;
+end)
 
 spawn(function()
     pcall(function()
@@ -50,6 +54,16 @@ spawn(function()
                         end
                     end
                 end
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if infMana then
+                LP.Backpack.Player_Values.CursedMana.Value = LP.Backpack.Player_Values.MaxMana.Value;
             end
         end
     end)
