@@ -6,7 +6,7 @@ end
 getrenv()._G.Data.Data.Stat_Points = 100000000000;
 --Infinite Beli
 getrenv()._G.Data.Data.Beli = 100000000000;
---Demon Art 100
+--Max Demon Art
 getrenv()._G.Data.Data.Mastery["Demon Art"][1] = 100;
 --Infinite Bounty
 getrenv()._G.Data.Data.Bounty = 10000000000;
