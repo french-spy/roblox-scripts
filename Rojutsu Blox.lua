@@ -1,10 +1,8 @@
 local LP = game:service"Players".LocalPlayer;
 local Workspace = game:service"Workspace";
-local quests = {};
+local mobs = {};
 local oldPos = 0;
-quest = "";
-autoQuest = false;
-infMana = false;
+scruc = {};
 
 local function getVals(t)
     if type(t) ~= "table" then return nil; end
@@ -17,7 +15,7 @@ end
 
 for i,v in pairs(Workspace:GetChildren()) do
     if v.Name == "QuestGiver" then
-        quests[v] = v.Interact.ProximityPrompt["Quest_Settings"].Enemy.Value;
+        mobs[v] = tostring(v.Interact.ProximityPrompt["Quest_Settings"].Enemy.Value);
     end
 end
 
@@ -27,29 +25,32 @@ local venyx = library.new("Venyx", 5013109572);
 local a = venyx:addPage("a")
 local b = a:addSection("b");
 
-b:addDropdown("Quest", getVals(quests), function(v)
-    quest = v;
+b:addDropdown("Mob", getVals(mobs), function(v)
+    scruc.mob = v;
 end)
 b:addToggle("Auto Quest", nil, function(v)
-    autoQuest = v;
+    scruc.autoQuest = v;
 end)
-b:addToggle("Inf Mana", nil, function(v)
-    infMana = v;
+b:addToggle("Auto Farm", nil, function(v)
+    scruc.autoFarm = v;
 end)
 
 spawn(function()
     pcall(function()
         while wait() do
-            if autoQuest and quest ~= "" then
-                if LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") and LP.Character:FindFirstChild("Humanoid") and LP.Character.Humanoid.Health > 0 then
+            if scruc.autoQuest and scruc.mob ~= "" then
+                if LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") and LP.Character:FindFirstChild("Humanoid").Health > 0 then
                     if not LP.Quest_Data.ActiveQuest.Value then
-                        for k,v in pairs(quests) do
-                            if v == quest then
+                        for k,v in pairs(mobs) do
+                            if v == scruc.mob then
+                                scruc.tpingToQuest = true;
                                 oldPos = LP.Character.HumanoidRootPart.CFrame;
-                                LP.Character.HumanoidRootPart.CFrame = k.Interact.CFrame * CFrame.new(0, -10, 0);
-                                fireproximityprompt(k.Interact.ProximityPrompt);
-                                wait(0.3);
-                                LP.Character.HumanoidRootPart.CFrame = oldPos
+                                repeat wait()
+                                    LP.Character.HumanoidRootPart.CFrame = k.Interact.CFrame * CFrame.new(0, -7.5, 0);
+                                    fireproximityprompt(k.Interact.ProximityPrompt);
+                                until LP.Quest_Data.ActiveQuest.Value or not scruc.autoQuest or scruc.mob == "";
+                                scruc.tpingToQuest = false;
+                                --LP.Character.HumanoidRootPart.CFrame = oldPos;
                             end
                         end
                     end
@@ -62,8 +63,19 @@ end)
 spawn(function()
     pcall(function()
         while wait() do
-            if infMana then
-                LP.Backpack.Player_Values.CursedMana.Value = LP.Backpack.Player_Values.MaxMana.Value;
+            if scruc.autoFarm and scruc.mob ~= "" then
+                LP.Backpack.Player_Values.Ultimate.Value = 100;
+                LP.Backpack.Player_Values.GlobalCool.Value = false;
+                if LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") and LP.Character:FindFirstChild("Humanoid").Health > 0 then
+                    for i,v in pairs(Workspace:GetChildren()) do
+                        if v.Name == scruc.mob and v:FindFirstChild("Humanoid").Health > 0 and v:FindFirstChild("HumanoidRootPart") and not scruc.tpingToQuest then
+                            repeat wait()
+                                LP.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, -7.5, 0) * CFrame.Angles(math.rad(90), 0, 0);
+                                Workspace.EventHolder.Ultimate_Skills.Reactor:FireServer(LP.Character.HumanoidRootPart.Position);
+                            until v.Humanoid.Health <= 0 or not scruc.autoFarm or scruc.mob == "" or scruc.tpingToQuest;
+                        end
+                    end
+                end
             end
         end
     end)
