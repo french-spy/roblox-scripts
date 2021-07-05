@@ -3,8 +3,7 @@ local function valueTracker(table)
     
     meta.__newindex = function(_, k, v)
         table[k] = v;
-        local a = game:service"ReplicatedStorage"[v]:Clone();
-        a.Parent = lp.Backpack;
+        --do stuff
     end;
     return proxy;
 end
