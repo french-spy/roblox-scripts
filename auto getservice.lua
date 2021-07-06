@@ -1,13 +1,10 @@
 local services = {};
-for i,v in next, game:GetChildren() do
-    table.insert(services, tostring(v));
-end
-
-local old;
-old = hookmetamethod(game, "__index", function(t, k)
-    if t == game and services[tostring(k)] then
-        print("yues");
-        return game:GetService(services[tostring[k]]);
-    end
-    return old(t, k);
-end);
+setmetatable(services, 
+{
+    __index = function(t, k)
+        if not rawget(t, k) then
+            rawset(t, k, game:GetService(k));
+            return game:GetService(k);
+        end
+    end;
+});
