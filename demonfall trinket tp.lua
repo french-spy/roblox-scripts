@@ -1,5 +1,3 @@
-_G.speed = 40 --Recommended to keep it at 40 for optimal speed and detection rate
-
 _eJdFK4D60lhKLav2, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
 
 
