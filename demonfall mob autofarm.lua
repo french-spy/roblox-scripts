@@ -67,58 +67,60 @@ local function getClosestMob()
     return temp;
 end
 
-while wait() do
-    if _G.autofarm then
-        local closest = getClosestMob();
-        repeat wait()
-            closest = getClosestMob();
-        until closest
-        
-        local dist = (closest.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude;
-        local t = dist / _G.speed;
-        
-        if dist <= _G.maxDist then
-            local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
-            local tween = ts:Create(lp.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position)});
-            tween:Play();
-            repeat wait() until (closest.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 100;
-            tween:Cancel();
-
-            _G.notExecuted = true;
-            
+pcall(function()
+    while wait() do
+        if _G.autofarm then
+            local closest = getClosestMob();
             repeat wait()
-                lp.Character.HumanoidRootPart.CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position);
-                if closest:FindFirstChild("Block") and not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then
-                    repeat wait() until lp.Character.Stamina.Value >= 25;
-                    rs.Remotes.Async:FireServer(style, "Heavy");
-                end
-                if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then rs.Remotes.Async:FireServer(style, "Server"); end
+                closest = getClosestMob();
+            until closest
+            
+            local dist = (closest.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude;
+            local t = dist / _G.speed;
+            
+            if dist <= _G.maxDist then
+                local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
+                local tween = ts:Create(lp.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position)});
+                tween:Play();
+                repeat wait() until (closest.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 100;
+                tween:Cancel();
     
-                if closest:FindFirstChild("Down") then
-                    repeat wait()
-                        lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame;
-                        _G.noclip = false;
-                        wait(0.25);
-                        rs.Remotes.Sync:InvokeServer("Character", "Execute");
-                    until lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing");
-                    --wait(1);
-                    --for i=0, 2 do lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame; end
-                    local br = ws.ChildAdded:Connect(function(c)
-                        c:WaitForChild("ItemName");
-                        if c.Name == "DropItem" and c.ItemName.Value == "Broken Nichirin" or c.ItemName.Value == "Demon Horn" then
-                            rs.Remotes.Async:FireServer("Character", "Interaction", c);
-                            vim:SendKeyEvent(true, Enum.KeyCode.E, false, game);
-                            wait(0.5);
-                            vim:SendKeyEvent(false, Enum.KeyCode.E, false, game);
-                        end
-                    end);
-                    wait(0.7);
-                    _G.notExecuted = false;
-                    br:Disconnect();
-                end
-            until not _G.autofarm or not _G.notExecuted
-            _G.noclip = true;
-            wait(1.5);
+                _G.notExecuted = true;
+                
+                repeat wait()
+                    lp.Character.HumanoidRootPart.CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position);
+                    if closest:FindFirstChild("Block") and not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then
+                        repeat wait() until lp.Character.Stamina.Value >= 25;
+                        rs.Remotes.Async:FireServer(style, "Heavy");
+                    end
+                    if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then rs.Remotes.Async:FireServer(style, "Server"); end
+        
+                    if closest:FindFirstChild("Down") then
+                        repeat wait()
+                            lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame;
+                            _G.noclip = false;
+                            wait(0.25);
+                            rs.Remotes.Sync:InvokeServer("Character", "Execute");
+                        until lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing");
+                        --wait(1);
+                        --for i=0, 2 do lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame; end
+                        local br = ws.ChildAdded:Connect(function(c)
+                            c:WaitForChild("ItemName");
+                            if c.Name == "DropItem" and c.ItemName.Value == "Broken Nichirin" or c.ItemName.Value == "Demon Horn" then
+                                rs.Remotes.Async:FireServer("Character", "Interaction", c);
+                                vim:SendKeyEvent(true, Enum.KeyCode.E, false, game);
+                                wait(0.5);
+                                vim:SendKeyEvent(false, Enum.KeyCode.E, false, game);
+                            end
+                        end);
+                        wait(0.7);
+                        _G.notExecuted = false;
+                        br:Disconnect();
+                    end
+                until not _G.autofarm or not _G.notExecuted
+                _G.noclip = true;
+                wait(1.5);
+            end
         end
     end
-end
+end)
