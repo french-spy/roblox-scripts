@@ -80,7 +80,7 @@ while wait() do
             local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
             local tween = ts:Create(lp.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position)});
             tween:Play();
-            repeat wait() until (closest.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 100;
+            repeat wait() until (closest.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 300;
             tween:Cancel();
 
             _G.notExecuted = true;
@@ -93,10 +93,10 @@ while wait() do
                 if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then rs.Remotes.Async:FireServer(style, "Server"); end
     
                 if closest:FindFirstChild("Down") then
-                    wait(0.5);
-                    lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame * CFrame.new(0, 2, 0);
+                    wait(1);
+                    for i=0, 2 do lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame; end
                     _G.noclip = false;
-                    wait(0.1);
+                    wait(0.25);
                     rs.Remotes.Sync:InvokeServer("Character", "Execute");
                     local br = ws.ChildAdded:Connect(function(c)
                         c:WaitForChild("ItemName");
