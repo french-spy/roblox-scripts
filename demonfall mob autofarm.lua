@@ -104,7 +104,7 @@ while wait() do
                     --for i=0, 2 do lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame; end
                     local br = ws.ChildAdded:Connect(function(c)
                         c:WaitForChild("ItemName");
-                        if c.Name == "DropItem" and c.ItemName.Value == "Broken Nichirin" then
+                        if c.Name == "DropItem" and c.ItemName.Value == "Broken Nichirin" or c.ItemName.Value == "Demon Horn" then
                             rs.Remotes.Async:FireServer("Character", "Interaction", c);
                             vim:SendKeyEvent(true, Enum.KeyCode.E, false, game);
                             wait(0.5);
