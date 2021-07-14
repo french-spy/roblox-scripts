@@ -1,5 +1,5 @@
 _G.speed = 40 --Recommended to keep it at 40 for optimal speed and detection rate
-_G.maxDist = 900 --Lower it if you get kicked
+_G.maxDist = 1000 --Lower it if you get kicked
 if game.PlaceId == 5094651510 then
     repeat wait() until game:IsLoaded();
     wait(1.5);
