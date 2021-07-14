@@ -45,10 +45,10 @@ end)
 c();
 
 local style = "";
-if lp.Character.HumanoidRootPart:FindFirstChild("Breath") then
+if not lp.Character:FindFirstChild("Horn") then
     style = "Katana";
 else
-    style = "Combat"
+    style = "Combat";
 end
 
 local function getClosestMob()
