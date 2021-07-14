@@ -44,6 +44,7 @@ local c =  coroutine.wrap(function()
 end)
 c();
 
+--Checks if you are a demon or a slayer
 local style = "";
 if not lp.Character:FindFirstChild("Horn") then
     style = "Katana";
