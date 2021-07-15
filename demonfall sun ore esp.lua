@@ -55,13 +55,13 @@ for i,v in pairs(ws.Map.Minerals:GetDescendants()) do
     end
 end
 
-ws.ChildAdded:Connect(function(v)
+ws.DescendantAdded:Connect(function(v)
     if v and v:IsDescendantOf(game) and v.Name == "Mineral" and _G.sunOreEsp then
         v:WaitForChild("MineralName");
-		v:WaitForChild("Spawn");
-		if v.MineralName.Value == "Sun Ore" then
-			print(v.Name .. " spawned");
-			pcall(makeEsp, v);
-		end
+	v:WaitForChild("Spawn");
+	if v.MineralName.Value == "Sun Ore" then
+		print(v.Name .. " spawned");
+		pcall(makeEsp, v);
+	end
     end
 end)
