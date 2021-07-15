@@ -159,7 +159,8 @@ if game.PlaceId == 5094651510 then
                 end
         end
     end)
+    local success = pcall(Teleport);
     repeat wait()
-        local success = pcall(Teleport);
+        success = pcall(Teleport);
     until success
 end
