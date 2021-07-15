@@ -90,10 +90,11 @@ pcall(function()
                 repeat wait()
                     lp.Character.HumanoidRootPart.CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position);
                     if closest:FindFirstChild("Block") and not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then
-                        repeat wait() until lp.Character.Stamina.Value >= 25;
-                        rs.Remotes.Async:FireServer(style, "Heavy");
+                        if lp.Character.Stamina.Value < 20 then
+                            rs.Remotes.Async:FireServer(style, "Heavy");
+                        end
                     end
-                    if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then rs.Remotes.Async:FireServer(style, "Server"); end
+                    if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") and not closest:FindFirstChild("Block") then rs.Remotes.Async:FireServer(style, "Server"); end
         
                     if closest:FindFirstChild("Down") then
                         local count = 0;
@@ -104,8 +105,6 @@ pcall(function()
                             rs.Remotes.Sync:InvokeServer("Character", "Execute");
                             count = count + 1;
                         until lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing") or count > 10;
-                        --wait(1);
-                        --for i=0, 2 do lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame; end
                         local br = ws.ChildAdded:Connect(function(c)
                             c:WaitForChild("ItemName");
                             if c.Name == "DropItem" and c.ItemName.Value == "Broken Nichirin" or c.ItemName.Value == "Demon Horn" then
