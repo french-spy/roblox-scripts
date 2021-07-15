@@ -1,6 +1,6 @@
 _G.mob = "GenericOni"; --GenericOni/GenericSlayer/Green Demon(?)
 _G.noclip = true;
-_G.speed = 40;
+_G.speed = 50;
 _G.distFromMob = 6;
 _G.maxDist = math.huge;
 _G.autofarm = true;
