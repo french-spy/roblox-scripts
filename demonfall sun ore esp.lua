@@ -50,7 +50,7 @@ local function makeEsp(v)
 end
 
 for i,v in pairs(ws.Map.Minerals:GetDescendants()) do
-    if v and v:IsDescendantOf(game) and v:IsA("MeshPart") and v.Name == "Mineral" and v:FindFirstChild("MineralName").Value == "Sun Ore" and v:FindFirstChild("Spawn") and _G.sunOreEsp then
+    if v and v:IsDescendantOf(game) and v:IsA("MeshPart") and v.Name == "Mineral" and v:FindFirstChild("MineralName").Value == "Sun Ore" and v:FindFirstChild("Spawn").Value ~= nil and _G.sunOreEsp then
         pcall(makeEsp, v);
     end
 end
@@ -60,8 +60,8 @@ ws.DescendantAdded:Connect(function(v)
         v:WaitForChild("MineralName");
 	v:WaitForChild("Spawn");
 	if v.MineralName.Value == "Sun Ore" then
-		print(v.Name .. " spawned");
-		pcall(makeEsp, v);
+	print(v.Name .. " spawned");
+	pcall(makeEsp, v);
 	end
     end
 end)
