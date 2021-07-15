@@ -1,6 +1,6 @@
 _G.mob = "Zenitsu"; --GenericOni/GenericSlayer/Green Demon(?)
 _G.noclip = true;
-_G.speed = 100;
+_G.speed = 40;
 _G.distFromMob = 5;
 _G.maxDist = math.huge;
 _G.autofarm = true;
