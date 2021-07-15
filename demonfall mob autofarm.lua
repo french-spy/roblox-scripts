@@ -96,15 +96,16 @@ end
                     if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then rs.Remotes.Async:FireServer(style, "Server"); end
         
                     if closest:FindFirstChild("Down") then
-                        local i = 0;
+                        local count = 0;
                         repeat wait()
                             lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame;
                             _G.noclip = false;
                             wait(0.25);
                             rs.Remotes.Sync:InvokeServer("Character", "Execute");
-                            i = i + 1;
-                        until lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing") or i > 7;
-                        
+                            count = count + 1;
+                        until lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing") or count > 7;
+                        --wait(1);
+                        --for i=0, 2 do lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame; end
                         local br = ws.ChildAdded:Connect(function(c)
                             c:WaitForChild("ItemName");
                             if c.Name == "DropItem" and c.ItemName.Value == "Broken Nichirin" or c.ItemName.Value == "Demon Horn" then
