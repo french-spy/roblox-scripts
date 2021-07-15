@@ -103,7 +103,7 @@ end
                             wait(0.25);
                             rs.Remotes.Sync:InvokeServer("Character", "Execute");
                             count = count + 1;
-                        until lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing") or count > 7;
+                        until lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing") or count > 10;
                         --wait(1);
                         --for i=0, 2 do lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame; end
                         local br = ws.ChildAdded:Connect(function(c)
