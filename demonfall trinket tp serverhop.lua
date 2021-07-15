@@ -138,7 +138,6 @@ if game.PlaceId == 5094651510 then
                 local closest, index = getClosestTrinket();
         
                 local dist = (closest.Position - lp.Character.HumanoidRootPart.Position).magnitude;
-                print(dist);
                 if dist <= _G.maxDist then
                     local time = dist / _G.speed; 
                         
