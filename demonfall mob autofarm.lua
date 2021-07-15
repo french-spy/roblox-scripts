@@ -90,7 +90,7 @@ pcall(function()
                 repeat wait()
                     lp.Character.HumanoidRootPart.CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position);
                     if closest:FindFirstChild("Block") and not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then
-                        if lp.Character.Stamina.Value < 20 then
+                        if lp.Character.Stamina.Value >= 20 then
                             rs.Remotes.Async:FireServer(style, "Heavy");
                         end
                     end
