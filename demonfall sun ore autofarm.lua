@@ -6,9 +6,11 @@ _G.minedOre = true;
 
 local lp = game:service"Players".LocalPlayer;
 local ts = game:service"TweenService";
+local vu = game:service"VirtualUser";
 local rs = game:service"ReplicatedStorage";
 local ws = game:service"Workspace";
 local runs = game:service"RunService";
+local vim = game:service"VirtualInputManager";
 
 --Hide Name
 local a = coroutine.wrap(function()
@@ -46,7 +48,7 @@ pcall(function()
 			if v and v:IsDescendantOf(game) and v:IsA("MeshPart") and v.Name == "Mineral" and v:FindFirstChild("MineralName").Value == "Sun Ore" and v:FindFirstChild("Spawn").Value ~= nil then
 				local dist = (v.Position - lp.Character.HumanoidRootPart.Position).magnitude;
 				local t = dist / _G.speed;
-				
+
 				local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
 				local tween = ts:Create(lp.Character.HumanoidRootPart, tweenInfo , {CFrame = v.CFrame});
 				tween:Play();
