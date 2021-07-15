@@ -46,7 +46,7 @@ c();
 
 --Checks if you are a demon or a slayer
 local style = "";
-if not lp.Character:FindFirstChild("Horn") then
+if getrenv()._G.PlayerData.Race == "Demon Slayer" then
     style = "Katana";
 else
     style = "Combat";
