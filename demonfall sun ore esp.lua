@@ -1,4 +1,4 @@
-_G.sunOreEsp = true
+_G.sunOreEsp = true;
 
 local lp = game:service"Players".LocalPlayer;
 local ws = game:service"Workspace";
@@ -25,7 +25,7 @@ local function makeEsp(v)
     local function update()
         local a;
         a = rs.RenderStepped:Connect(function()
-            if v and v:IsDescendantOf(game) and v:FindFirstChild("Spawn") then  
+            if v and v:IsDescendantOf(game) and v:FindFirstChild("Spawn").Value ~= nil then  
                 local vector, onScreen = camera:WorldToViewportPoint(v.Position);
                 if _G.sunOreEsp and onScreen then
                     Name.Position = Vector2.new(vector.X, vector.Y);
@@ -39,7 +39,7 @@ local function makeEsp(v)
                     Name.Visible = false;
                     Distance.Visible = false;
                 end
-            elseif not v or not v:IsDescendantOf(game) or not V:FindFirstChild("Spawn") then
+            elseif not v or not v:IsDescendantOf(game) or v:FindFirstChild("Spawn").Value == nil  then
                 Name:Remove()
                 Distance:Remove();
                 a:Disconnect();
