@@ -67,7 +67,7 @@ local function getClosestMob()
     return temp;
 end
 
---pcall(function()
+pcall(function()
     while wait() do
         if _G.autofarm then
             local closest = getClosestMob();
@@ -125,4 +125,4 @@ end
             end
         end
     end
---end)
+end)
