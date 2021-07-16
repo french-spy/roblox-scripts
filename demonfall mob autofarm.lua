@@ -105,14 +105,16 @@ pcall(function()
                 
                 repeat wait()
                     lp.Character.HumanoidRootPart.CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position);
-                    --REMOVE THIS IN THE GUI, BECAUSE IF COMBINED WITH INFINITE M1s IT WILL SPAM HEAVY ATTACK-------------
+                    --[[
+					--REMOVE THIS IN THE GUI, BECAUSE IF COMBINED WITH INFINITE M1s IT WILL SPAM HEAVY ATTACK-------------
 					if closest:FindFirstChild("Block") and not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then
                         if lp.Character.Stamina.Value >= 20 then
                             rs.Remotes.Async:FireServer(style, "Heavy");
                         end
                     end
 					-------------------------------------
-                    if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then rs.Remotes.Async:FireServer(style, "Server"); end
+                    --]]
+					if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then rs.Remotes.Async:FireServer(style, "Server"); end
         
                     if closest:FindFirstChild("Down") then
                         local count = 0;
