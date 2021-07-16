@@ -1,7 +1,6 @@
 _G.speed = 40 --Recommended to keep it at 40 for optimal speed and detection rate
 _G.maxDist = math.huge --Lower it if you get kicked
 _G.trinketFarm = true;
-_G.canTp = false;
 _G.noclip = true;
 
 local lp = game:service"Players".LocalPlayer;
