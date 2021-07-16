@@ -1,7 +1,7 @@
 _G.mob = "Zenitsu"; --GenericOni/GenericSlayer/Green Demon(?)
 _G.noclip = true;
-_G.speed = 40;
-_G.distFromMob = 5;
+_G.speed = 45;
+_G.distFromMob = 6;
 _G.maxDist = math.huge;
 _G.autofarm = true;
 _G.notExecuted = true; --dont touch
@@ -14,6 +14,12 @@ local rs = game:service"ReplicatedStorage";
 local ws = game:service"Workspace";
 local runs = game:service"RunService";
 local vim = game:service"VirtualInputManager"; 
+
+local spawns = 
+{
+	["Zenitsu"] = CFrame.new(-2537.05103, 941.436035, -3351.02222, 0.30188486, -1.47914374e-08, 0.953344405, 5.87038906e-09, 1, 1.36564031e-08, -0.953344405, 1.47384116e-09, 0.30188486),
+	["Green Demon"] = CFrame.new(1474.98828, 818.827637, -6379.07861, 0.00430911547, -7.22375617e-08, -0.999990702, -4.87611951e-10, 1, -7.22403328e-08, 0.999990702, 7.98899336e-10, 0.00430911547)
+}
 
 --Hide Name
 local a = coroutine.wrap(function()
@@ -28,19 +34,14 @@ local a = coroutine.wrap(function()
     end)
 end)
 a();
---Check for lp character
-local b = coroutine.wrap(function()
-    runs.RenderStepped:Connect(function()
-        if not lp.Character then repeat wait() until lp.Character; end
-    end)
-end)
-b();
 
 --Noclip
 local c =  coroutine.wrap(function()
-    runs.RenderStepped:Connect(function()
-        if _G.noclip then lp.Character.Humanoid:ChangeState(11); end
-    end)
+	pcall(function()
+		runs.RenderStepped:Connect(function()
+			if _G.noclip then lp.Character.Humanoid:ChangeState(11); end
+		end)
+	end)
 end)
 c();
 
@@ -53,33 +54,48 @@ else
 end
 
 local function getClosestMob()
-    local temp;
+    local temp = nil;
     for i,v in next, ws:GetChildren() do
-        if v:IsA("Model") and v.Name == _G.mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Health").Value > 0 and not v:FindFirstChild("Down") then temp = v; break; end
+        if v:IsA("Model") and v.Name == _G.mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Health") and v.Health.Value > 0 and not v:FindFirstChild("Down") then temp = v; break; end
     end
     for i,v in next, ws:GetChildren() do
-        if v:IsA("Model") and v.Name == _G.mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Health").Value > 0 and not v:FindFirstChild("Down") then
+        if v:IsA("Model") and v.Name == _G.mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Health") and v.Health.Value > 0 and not v:FindFirstChild("Down") then
             if (v.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude < (temp.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude then
                 temp = v;
             end
         end
     end
+	print(temp);
     return temp;
 end
 
 pcall(function()
     while wait() do
         if _G.autofarm then
+			--EXPERIMENT WITH DISTANCE FOR GREEN DEMON
+			if _G.mob == "Green Demon" then _G.distFromMob = 10; else _G.distFromMob = 6; end
+			if _G.mob == "Zenitsu" or _G.mob == "Green Demon" then
+				local dist = (spawns[_G.mob].Position - lp.Character.HumanoidRootPart.Position).magnitude;
+				local t = dist / _G.speed;
+				
+				local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
+				local tween = ts:Create(lp.Character.HumanoidRootPart, tweenInfo, {CFrame = spawns[_G.mob]});
+				tween:Play();
+				repeat wait() until (spawns[_G.mob].Position - lp.Character.HumanoidRootPart.Position).magnitude <= 100;
+				tween:Cancel();
+				lp.Character.HumanoidRootPart.CFrame = spawns[_G.mob];
+			end
+		
             local closest = getClosestMob();
             repeat wait()
                 closest = getClosestMob();
             until closest
             
-            local dist = (closest.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude;
+			local dist = (closest.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude;
             local t = dist / _G.speed;
             
             if dist <= _G.maxDist then
-                local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
+				local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
                 local tween = ts:Create(lp.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position)});
                 tween:Play();
                 repeat wait() until (closest.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 100;
@@ -89,12 +105,14 @@ pcall(function()
                 
                 repeat wait()
                     lp.Character.HumanoidRootPart.CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position);
-                    if closest:FindFirstChild("Block") and not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then
+                    --REMOVE THIS IN THE GUI, BECAUSE IF COMBINED WITH INFINITE M1s IT WILL SPAM HEAVY ATTACK-------------
+					if closest:FindFirstChild("Block") and not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then
                         if lp.Character.Stamina.Value >= 20 then
                             rs.Remotes.Async:FireServer(style, "Heavy");
                         end
                     end
-                    if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") and not closest:FindFirstChild("Block") then rs.Remotes.Async:FireServer(style, "Server"); end
+					-------------------------------------
+                    if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then rs.Remotes.Async:FireServer(style, "Server"); end
         
                     if closest:FindFirstChild("Down") then
                         local count = 0;
