@@ -26,8 +26,7 @@ a();
 local b = coroutine.wrap(function()
 	pcall(function()
 		local connection = runs.RenderStepped:Connect(function()
-			if not _G.noclip then connection:Disconnect(); end
-			lp.Character.Humanoid:ChangeState(11);
+			if _G.noclip then lp.Character.Humanoid:ChangeState(11); end
 		end)
 	end)
 end)
