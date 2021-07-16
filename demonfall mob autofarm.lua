@@ -71,7 +71,7 @@ end
 
 pcall(function()
     while wait() do
-        if _G.autofarm then
+        if _G.autofarm and lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") then
 			--EXPERIMENT WITH DISTANCE FOR GREEN DEMON
 			if _G.mob == "Green Demon" then _G.distFromMob = 10; else _G.distFromMob = 6; end
 			if _G.mob == "Zenitsu" or _G.mob == "Green Demon" then
