@@ -70,7 +70,6 @@ pcall(function()
 		if dist <= 100 then
 			lp.Character.HumanoidRootPart.CFrame = closest.CFrame;
 			repeat wait() rs.Remotes.Async:FireServer("Character", "Interaction", trinket); until not closest:FindFirstChild("Spawned") or not trinket
-			wait(1.5);
 		else
 			local t = dist / _G.speed;
 			local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
@@ -81,7 +80,7 @@ pcall(function()
 			
 			lp.Character.HumanoidRootPart.CFrame = closest.CFrame;
 			repeat wait() rs.Remotes.Async:FireServer("Character", "Interaction", trinket); until not closest:FindFirstChild("Spawned") or not trinket
-			wait(1.5);
 		end
+		wait(1);
 	end
 end)
