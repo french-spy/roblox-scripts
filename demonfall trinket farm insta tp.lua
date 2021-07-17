@@ -15,7 +15,8 @@ local runs = game:service"RunService";
 
 bindable.OnInvoke = function()
 	if _G.canTeleport == false then 
-		_G.canTeleport = true
+		_G.canTeleport = true;
+		if game:service"Players".LocalPlayer:FindFirstChild("LastSpawned") then repeat wait() until not game:service"Players".LocalPlayer:FindFirstChild("LastSpawned"); end
 		game:GetService("ReplicatedStorage").Remotes.Sync:InvokeServer("Player", "SpawnCharacter")
 
 		delay(8, function()
