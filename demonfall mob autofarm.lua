@@ -65,7 +65,6 @@ local function getClosestMob()
             end
         end
     end
-	print(temp);
     return temp;
 end
 
@@ -105,26 +104,23 @@ pcall(function()
                 
                 repeat wait()
                     lp.Character.HumanoidRootPart.CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position);
-                    --[[
-					--REMOVE THIS IN THE GUI, BECAUSE IF COMBINED WITH INFINITE M1s IT WILL SPAM HEAVY ATTACK-------------
-					if closest:FindFirstChild("Block") and not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then
-                        if lp.Character.Stamina.Value >= 20 then
+					if closest:FindFirstChild("Block") and not closest:FindFirstChild("Ragdoll") then
+                        if lp.Stamina.Value >= 20 then
                             rs.Remotes.Async:FireServer(style, "Heavy");
                         end
                     end
-					-------------------------------------
-                    --]]
-					if not closest:FindFirstChild("Ragdoll") or not closest:FindFirstChild("Ragdolled") then rs.Remotes.Async:FireServer(style, "Server"); end
-        
+					
+					if not closest:FindFirstChild("Ragdoll") and not closest:FindFirstChild("Block") then wait(0.45); rs.Remotes.Async:FireServer(style, "Server"); end
+					
                     if closest:FindFirstChild("Down") then
                         local count = 0;
                         repeat wait()
                             lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame;
                             _G.noclip = false;
                             wait(0.25);
-                            rs.Remotes.Sync:InvokeServer("Character", "Execute");
                             count = count + 1;
-                        until lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing") or count > 10;
+							rs.Remotes.Sync:InvokeServer("Character", "Execute");
+                        until closest:FindFirstChild("Executed") or count > 10;
                         local br = ws.ChildAdded:Connect(function(c)
                             c:WaitForChild("ItemName");
                             if c.Name == "DropItem" and c.ItemName.Value == "Broken Nichirin" or c.ItemName.Value == "Demon Horn" then
