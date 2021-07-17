@@ -6,7 +6,7 @@ local ws = game:service"Workspace";
 local runs = game:service"RunService";
 local vim = game:service"VirtualInputManager"; 
 
-_G.speed = 40;
+_G.speed = 45;
 _G.noclip = true;
 
 local coords = 
@@ -46,10 +46,12 @@ local t = dist / _G.speed;
 local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
 local tween = ts:Create(lp.Character.HumanoidRootPart, tweenInfo, {CFrame = coords["Fall's Bridge"]});
 tween:Play();
-repeat wait() until (coords["Fall's Bridge"].Position - lp.Character.HumanoidRootPart.Position).magnitude <= 150;
+repeat wait() until (coords["Fall's Bridge"].Position - lp.Character.HumanoidRootPart.Position).magnitude <= 100;
 tween:Cancel();
 lp.Character.HumanoidRootPart.CFrame = coords["Fall's Bridge"];
 _G.noclip = false;
+
+
 
 --[[Example
 
