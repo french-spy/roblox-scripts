@@ -54,11 +54,18 @@ _G.noclip = false;
 
 
 --[[Example
-
-sss:Dropdown("Place Teleport", getKeys(coords), function(t)
+sss:Dropdown("Place Teleport", getKeys(coords), function(v)
     if coords[t] then
-        --Tp
+        local dist = (coords[v].Position - lp.Character.HumanoidRootPart.Position).magnitude;
+		local t = dist / _G.speed;
+
+		local tweenInfo = TweenInfo.new(v, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
+		local tween = ts:Create(lp.Character.HumanoidRootPart, tweenInfo, {CFrame = coords[v]});
+		tween:Play();
+		repeat wait() until (coords[v].Position - lp.Character.HumanoidRootPart.Position).magnitude <= 100;
+		tween:Cancel();
+		lp.Character.HumanoidRootPart.CFrame = coords[v];
+		_G.noclip = false;
     end
 end)
-
 --]]
