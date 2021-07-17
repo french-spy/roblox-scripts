@@ -52,6 +52,10 @@ if dist <= 100 then
 else
 	bindable:Invoke();
 	lp.Character.HumanoidRootPart.CFrame = CFrame.new(coords["Rengoku"]);
+	local count = 0;
+	while count < 0.55 do
+		count = count + runs.RenderStepped:Wait();
+	end
 end
 
 --[[Example
