@@ -1,3 +1,22 @@
+local bindable = game:GetService("CoreGui"):FindFirstChild("teleporter") or Instance.new("BindableFunction") bindable.Name = "teleporter" bindable.Parent = game:GetService("CoreGui")
+
+_G.canTeleport = false;
+
+bindable.OnInvoke = function()
+	if _G.canTeleport == false then 
+		_G.canTeleport = true
+		game:GetService("ReplicatedStorage").Remotes.Sync:InvokeServer("Player", "SpawnCharacter")
+
+		delay(8, function()
+			_G.canTeleport = false
+		end)
+
+		return wait(2.5)
+	else 
+		return wait(1.25)
+	end
+end
+
 local lp = game:service"Players".LocalPlayer;
 local ts = game:service"TweenService";
 local vu = game:service"VirtualUser";
@@ -5,9 +24,6 @@ local rs = game:service"ReplicatedStorage";
 local ws = game:service"Workspace";
 local runs = game:service"RunService";
 local vim = game:service"VirtualInputManager"; 
-
-_G.speed = 45;
-_G.noclip = true;
 
 local coords = 
 {
@@ -32,40 +48,25 @@ local function getKeys(t) --Use this for the dropdown table
 	return temp;
 end
 
---Noclip
-local c =  coroutine.wrap(function()
-    runs.RenderStepped:Connect(function()
-        if _G.noclip then lp.Character.Humanoid:ChangeState(11); end
-    end)
-end)
-c();
-
 local dist = (coords["Fall's Bridge"].Position - lp.Character.HumanoidRootPart.Position).magnitude;
-local t = dist / _G.speed;
 
-local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
-local tween = ts:Create(lp.Character.HumanoidRootPart, tweenInfo, {CFrame = coords["Fall's Bridge"]});
-tween:Play();
-repeat wait() until (coords["Fall's Bridge"].Position - lp.Character.HumanoidRootPart.Position).magnitude <= 100;
-tween:Cancel();
-lp.Character.HumanoidRootPart.CFrame = coords["Fall's Bridge"];
-_G.noclip = false;
-
-
+if dist <= 100 then
+	lp.Character.HumanoidRootPart.CFrame = coords["Fall's Bridge"];
+else
+	bindable:Invoke();
+	lp.Character.HumanoidRootPart.CFrame = coords["Fall's Bridge"];
+end
 
 --[[Example
-sss:Dropdown("Place Teleport", getKeys(coords), function(v)
+sss:Dropdown("Place Teleport", getKeys(coords), function(t)
     if coords[t] then
-        local dist = (coords[v].Position - lp.Character.HumanoidRootPart.Position).magnitude;
-		local t = dist / _G.speed;
-
-		local tweenInfo = TweenInfo.new(v, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
-		local tween = ts:Create(lp.Character.HumanoidRootPart, tweenInfo, {CFrame = coords[v]});
-		tween:Play();
-		repeat wait() until (coords[v].Position - lp.Character.HumanoidRootPart.Position).magnitude <= 100;
-		tween:Cancel();
-		lp.Character.HumanoidRootPart.CFrame = coords[v];
-		_G.noclip = false;
-    end
+        local dist = (coords[t].Position - lp.Character.HumanoidRootPart.Position).magnitude;
+		if dist <= 100 then
+			lp.Character.HumanoidRootPart.CFrame = coords[t];
+		else
+			bindable:Invoke();
+			lp.Character.HumanoidRootPart.CFrame = coords[t];
+		end
+	end
 end)
 --]]
