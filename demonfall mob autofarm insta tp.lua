@@ -135,7 +135,7 @@ pcall(function()
 						if lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing") then
 							local cf = lp.Character.HumanoidRootPart.CFrame;
 							local count2 = 0;
-							repeat wait() lp.Character.HumanoidRootPart.Anchored = false; lp.Character.HumanoidRootPart.CFrame = cf * CFrame.new(0, -15, 0); count2 = count2 + 1; until closest:FindFirstChild("Executed") or count2 >= 100;	
+							repeat wait() lp.Character.HumanoidRootPart.Anchored = false; lp.Character.HumanoidRootPart.CFrame = cf * CFrame.new(0, -15, 0); count2 = count2 + 1; until closest:FindFirstChild("Executed") or lp.Character:FindFirstChild("ExecutionCooldown") or count2 >= 100;	
 						end
 					until closest:FindFirstChild("Executed") or count > 10;
 					local br = ws.ChildAdded:Connect(function(c)
