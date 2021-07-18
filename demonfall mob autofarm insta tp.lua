@@ -134,7 +134,8 @@ pcall(function()
 						vim:SendKeyEvent(false, Enum.KeyCode.B, false, game);
 						if lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing") then
 							local cf = lp.Character.HumanoidRootPart.CFrame;
-							repeat wait() lp.Character.HumanoidRootPart.Anchored = false; lp.Character.HumanoidRootPart.CFrame = cf * CFrame.new(0, -15, 0); until closest:FindFirstChild("Executed");	
+							local count2 = 0;
+							repeat wait() lp.Character.HumanoidRootPart.Anchored = false; lp.Character.HumanoidRootPart.CFrame = cf * CFrame.new(0, -15, 0); count2 = count2 + 1; until closest:FindFirstChild("Executed") or count2 >= 100;	
 						end
 					until closest:FindFirstChild("Executed") or count > 10;
 					local br = ws.ChildAdded:Connect(function(c)
