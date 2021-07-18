@@ -127,10 +127,15 @@ pcall(function()
 					local count = 0;
 					repeat wait()
 						lp.Character.HumanoidRootPart.CFrame = closest.HumanoidRootPart.CFrame;
-						_G.noclip = false;
-						wait(0.25);
+						wait(0.1);
 						count = count + 1;
-						rs.Remotes.Sync:InvokeServer("Character", "Execute");
+						vim:SendKeyEvent(true, Enum.KeyCode.B, false, game);
+						wait(0.5);
+						vim:SendKeyEvent(false, Enum.KeyCode.B, false, game);
+						if lp.Character:FindFirstChild("OnExecute") or closest:FindFirstChild("Executing") then
+							local cf = lp.Character.HumanoidRootPart.CFrame;
+							repeat wait() lp.Character.HumanoidRootPart.Anchored = false; lp.Character.HumanoidRootPart.CFrame = cf * CFrame.new(0, -15, 0); until closest:FindFirstChild("Executed");	
+						end
 					until closest:FindFirstChild("Executed") or count > 10;
 					local br = ws.ChildAdded:Connect(function(c)
 						c:WaitForChild("ItemName");
