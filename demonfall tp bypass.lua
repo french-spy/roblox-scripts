@@ -17,5 +17,4 @@ a.bindable.OnInvoke = function()
 		return wait(1.5)
 	end
 end
-
 return a;
