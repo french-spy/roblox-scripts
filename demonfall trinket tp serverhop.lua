@@ -3,7 +3,7 @@ wait(1.5);
 
 _G.trinketFarm = true;
 _G.noclip = true;
-_G.trinketsBeforeHop = 25; --The amount of trinkets to get before serverhopping
+_G.trinketsBeforeHop = 3; --The amount of trinkets to get before serverhopping
 
 local lp = game:service"Players".LocalPlayer;
 local ts = game:service"TweenService";
@@ -15,7 +15,7 @@ local runs = game:service"RunService";
 if lp.PlayerGui:FindFirstChild("LoadingScreen") then firesignal(lp.PlayerGui.LoadingScreen.Background.Loading.Skip.MouseButton1Click); end
     
 repeat wait() until lp.Character;
-wait(5);
+wait(15);
 
 local PlaceID = game.PlaceId
 local AllIDs = {}
