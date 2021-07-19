@@ -15,7 +15,7 @@ local runs = game:service"RunService";
 local vim = game:service"VirtualInputManager"; 
 
 local tpBypass = loadstring(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/demonfall%20tp%20bypass.lua"))();
-local drops = {"Green Horn", "Demon Horn", "Broken Nichirin", "Crystal Essence"};
+local drops = {"Green Horn", "Demon Horn", "Broken Nichirin", "Crystal Essence", "Demon Collar"};
 
 local spawns = 
 {
