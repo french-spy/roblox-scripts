@@ -1,6 +1,3 @@
-local bindable = game:GetService("CoreGui"):FindFirstChild("teleporter") or Instance.new("BindableFunction") bindable.Name = "teleporter" bindable.Parent = game:GetService("CoreGui")
-
-_G.canTeleport = false;
 _G.speed = 40 --Recommended to keep it at 40 for optimal speed and detection rate
 _G.maxDist = math.huge --Lower it if you get kicked
 _G.trinketFarm = true;
@@ -13,21 +10,7 @@ local rs = game:service"ReplicatedStorage";
 local ws = game:service"Workspace";
 local runs = game:service"RunService";
 
-bindable.OnInvoke = function()
-	if _G.canTeleport == false then 
-		_G.canTeleport = true;
-		if game:service"Players".LocalPlayer:FindFirstChild("LastSpawned") then repeat wait() until not game:service"Players".LocalPlayer:FindFirstChild("LastSpawned"); end
-		game:GetService("ReplicatedStorage").Remotes.Sync:InvokeServer("Player", "SpawnCharacter")
-
-		delay(8, function()
-			_G.canTeleport = false
-		end)
-
-		return wait(2.5)
-	else 
-		return wait(1.25)
-	end
-end
+local tpBypass = loadstring(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/demonfall%20tp%20bypass.lua"))();
 
 local a = coroutine.wrap(function()
 	pcall(function()
@@ -89,7 +72,7 @@ pcall(function()
 			lp.Character.HumanoidRootPart.CFrame = closest.CFrame;
 			repeat wait() rs.Remotes.Async:FireServer("Character", "Interaction", trinket); until not closest:FindFirstChild("Spawned") or not trinket
 		else
-			bindable:Invoke();
+			tpBypass.bindable:Invoke();
 			lp.Character.HumanoidRootPart.CFrame = closest.CFrame;
 			local count = 0;
 			while count < 0.55 do
