@@ -1,23 +1,3 @@
-local bindable = game:GetService("CoreGui"):FindFirstChild("teleporter") or Instance.new("BindableFunction") bindable.Name = "teleporter" bindable.Parent = game:GetService("CoreGui")
-
-_G.canTeleport = false;
-
-bindable.OnInvoke = function()
-	if _G.canTeleport == false then
-		if game:service"Players".LocalPlayer:FindFirstChild("LastSpawned") then repeat wait() until not game:service"Players".LocalPlayer:FindFirstChild("LastSpawned"); end
-		_G.canTeleport = true
-		game:GetService("ReplicatedStorage").Remotes.Sync:InvokeServer("Player", "SpawnCharacter")
-
-		delay(8, function()
-			_G.canTeleport = false
-		end)
-
-		return wait(2.5)
-	else 
-		return wait(1.25)
-	end
-end
-
 local lp = game:service"Players".LocalPlayer;
 local ts = game:service"TweenService";
 local vu = game:service"VirtualUser";
@@ -25,6 +5,8 @@ local rs = game:service"ReplicatedStorage";
 local ws = game:service"Workspace";
 local runs = game:service"RunService";
 local vim = game:service"VirtualInputManager"; 
+
+local tpBypass = loadstring(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/demonfall%20tp%20bypass.lua"))();
 
 local coords = 
 {
@@ -45,18 +27,19 @@ local function getKeys(t) --Use this for the dropdown table
 	return temp;
 end
 
-local dist = (coords["Rengoku"] - lp.Character.HumanoidRootPart.Position).magnitude;
-
-if dist <= 100 then
-	lp.Character.HumanoidRootPart.CFrame = CFrame.new(coords["Rengoku"]);
-else
-	bindable:Invoke();
-	lp.Character.HumanoidRootPart.CFrame = CFrame.new(coords["Rengoku"]);
-	local count = 0;
-	while count < 0.55 do
-		count = count + runs.RenderStepped:Wait();
+for i,v in pairs(getKeys(coords)) do
+	if coords[v] then
+		local dist = (coords[v] - lp.Character.HumanoidRootPart.Position).magnitude;
+		if dist <= 100 then
+			lp.Character.HumanoidRootPart.CFrame = CFrame.new(coords[v]);
+		else
+			tpBypass.bindable:Invoke();
+			lp.Character.HumanoidRootPart.CFrame = CFrame.new(coords[v]);
+		end
 	end
 end
+
+
 
 --[[Example
 sss:Dropdown("Trainer TP", getKeys(coords), function(t)
@@ -66,7 +49,7 @@ sss:Dropdown("Trainer TP", getKeys(coords), function(t)
 		if dist <= then
 			lp.Character.HumanoidRootPart.CFrame = CFrame.new(coords[t]);
 		else
-			bindable:Invoke();
+			tpBypass.bindable:Invoke();
 			lp.Character.HumanoidRootPart.CFrame = CFrame.new(coords[t]);
 		end
     end
