@@ -31,8 +31,6 @@ local function getKeys(t) --Use this for the dropdown table
 	return temp;
 end
 
-local dist = (coords["Fall's Bridge"].Position - lp.Character.HumanoidRootPart.Position).magnitude;
-
 for i,v in pairs(getKeys(coords)) do
     if coords[v] then
         local dist = (coords[v].Position - lp.Character.HumanoidRootPart.Position).magnitude;
