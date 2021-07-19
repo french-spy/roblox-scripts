@@ -1,8 +1,9 @@
-local bindable = game:GetService("CoreGui"):FindFirstChild("teleporter") or Instance.new("BindableFunction") bindable.Name = "teleporter" bindable.Parent = game:GetService("CoreGui")
+local a = {};
+a.bindable = game:GetService("CoreGui"):FindFirstChild("teleporter") or Instance.new("BindableFunction") bindable.Name = "teleporter" bindable.Parent = game:GetService("CoreGui")
 
 _G.canTeleport = false;
 
-bindable.OnInvoke = function()
+a.bindable.OnInvoke = function()
 	if not game:service"Players".LocalPlayer:FindFirstChild("SecurityBypass") then 
 		_G.canTeleport = true
 		game:GetService("ReplicatedStorage").Remotes.Sync:InvokeServer("Player", "SpawnCharacter")
@@ -16,3 +17,5 @@ bindable.OnInvoke = function()
 		return wait(1.5)
 	end
 end
+
+return a;
