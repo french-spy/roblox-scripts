@@ -160,7 +160,7 @@ pcall(function()
 		print(aa);
 		wait(1);
 	end
-	syn.queue_on_teleport(game:HttpGet());
+	syn.queue_on_teleport(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/demonfall%20trinket%20tp%20serverhop.lua"));
 	local success = pcall(Teleport);
 	repeat wait()
 		success = pcall(Teleport);
