@@ -1,8 +1,6 @@
 repeat wait() until game:IsLoaded();
 wait(1.5);
 
-_G.speed = 40 --Recommended to keep it at 40 for optimal speed and detection rate
-_G.maxDist = math.huge --Lower it if you get kicked
 _G.trinketFarm = true;
 _G.noclip = true;
 
