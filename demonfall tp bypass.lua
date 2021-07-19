@@ -3,7 +3,7 @@ local bindable = game:GetService("CoreGui"):FindFirstChild("teleporter") or Inst
 _G.canTeleport = false;
 
 bindable.OnInvoke = function()
-	if _G.canTeleport == false then 
+	if not game:service"Players".LocalPlayer:FindFirstChild("SecurityBypass") then 
 		_G.canTeleport = true
 		game:GetService("ReplicatedStorage").Remotes.Sync:InvokeServer("Player", "SpawnCharacter")
 
@@ -11,8 +11,8 @@ bindable.OnInvoke = function()
 			_G.canTeleport = false
 		end)
 
-		return wait(2.5)
+		return wait(3)
 	else 
-		return wait(1.25)
+		return wait(1.5)
 	end
 end
