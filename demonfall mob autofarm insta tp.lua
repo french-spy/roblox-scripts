@@ -1,21 +1,3 @@
-_G.canTeleport = false;
-local bindable = game:GetService("CoreGui"):FindFirstChild("teleporter") or Instance.new("BindableFunction") bindable.Name = "teleporter" bindable.Parent = game:GetService("CoreGui")
-bindable.OnInvoke = function()
-	if _G.canTeleport == false then
-		if game:service"Players".LocalPlayer:FindFirstChild("LastSpawned") then repeat wait() until not game:service"Players".LocalPlayer:FindFirstChild("LastSpawned"); end
-		_G.canTeleport = true
-		game:GetService("ReplicatedStorage").Remotes.Sync:InvokeServer("Player", "SpawnCharacter")
-
-		delay(8, function()
-			_G.canTeleport = false
-		end)
-
-		return wait(2.5)
-	else 
-		return wait(1.25)
-	end
-end
-
 _G.mob = "Zenitsu"; --GenericOni/GenericSlayer/Green Demon(?)
 _G.noclip = true;
 _G.speed = 45;
@@ -31,6 +13,8 @@ local rs = game:service"ReplicatedStorage";
 local ws = game:service"Workspace";
 local runs = game:service"RunService";
 local vim = game:service"VirtualInputManager"; 
+
+local tpBypass = loadstring(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/demonfall%20tp%20bypass.lua"))();
 
 local spawns = 
 {
@@ -95,7 +79,7 @@ pcall(function()
 				if dist <= 100 then
 					lp.Character.HumanoidRootPart.CFrame = spawns[_G.mob];
 				else
-					bindable:Invoke();
+					tpBypass.bindable:Invoke();
 					lp.Character.HumanoidRootPart.CFrame = spawns[_G.mob];
 				end
 			end
@@ -108,7 +92,7 @@ pcall(function()
 			local dist = (closest.HumanoidRootPart.Position - lp.Character.HumanoidRootPart.Position).magnitude;
             local t = dist / _G.speed;
 			
-			bindable:Invoke();
+			tpBypass.bindable:Invoke();
 			lp.Character.HumanoidRootPart.CFrame = CFrame.new((closest.HumanoidRootPart.Position + Vector3.new(0, _G.distFromMob, 0)), closest.HumanoidRootPart.Position);
 			
 			_G.notExecuted = true;
