@@ -183,6 +183,7 @@ _G.notExecuted = true; --dont touch
 						_G.noclip = true;
 						wait(1.5);
 					elseif _G.autofarm and lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") and lp.Health.Value ~= 0 and demonsLeft <= 2 then
+						syn.queue_on_teleport(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/pls%20god.lua"));
 						tps:Teleport(5094651510, lp);
 					end
 				end
@@ -221,6 +222,7 @@ _G.notExecuted = true; --dont touch
 					print("brrr");
 					local x, y = math.floor(v.AbsolutePosition.X + 0.5), math.floor(v.AbsolutePosition.Y + 0.5);
 					print(x, y);
+					syn.queue_on_teleport(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/pls%20god.lua"));
 					vim:SendMouseButtonEvent(x + 25, y + 40, 0, true, game, 0);
 					wait(0.5);
 					vim:SendMouseButtonEvent(x + 25, y + 40, 0, false, game, 0);
