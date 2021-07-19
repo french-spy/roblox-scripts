@@ -15,6 +15,7 @@ local runs = game:service"RunService";
 local vim = game:service"VirtualInputManager"; 
 
 local tpBypass = loadstring(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/demonfall%20tp%20bypass.lua"))();
+local drops = {"Green Horn", "Demon Horn", "Broken Nichirin", "Crystal Essence"};
 
 local spawns = 
 {
@@ -124,7 +125,7 @@ pcall(function()
 					until closest:FindFirstChild("Executed") or count > 10;
 					local br = ws.ChildAdded:Connect(function(c)
 						c:WaitForChild("ItemName");
-						if c.Name == "DropItem" and c.ItemName.Value == "Broken Nichirin" or c.ItemName.Value == "Demon Horn" then
+						if c.Name == "DropItem" and drops[c.Name] then
 							rs.Remotes.Async:FireServer("Character", "Interaction", c);
 							vim:SendKeyEvent(true, Enum.KeyCode.E, false, game);
 							wait(0.5);
