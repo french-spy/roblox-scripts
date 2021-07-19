@@ -3,6 +3,7 @@ wait(1.5);
 
 _G.trinketFarm = true;
 _G.noclip = true;
+_G.trinketsBeforeHop = 25; --The amount of trinkets to get before serverhopping
 
 local lp = game:service"Players".LocalPlayer;
 local ts = game:service"TweenService";
@@ -127,7 +128,7 @@ end
 
 pcall(function()
 	local aa = 0;
-	while _G.trinketFarm and aa < 100 do wait()
+	while _G.trinketFarm and aa < _G.trinketsBeforeHop do wait()
 		local closest = getClosestTrinket();
 		repeat wait()
 			closest = getClosestTrinket();
