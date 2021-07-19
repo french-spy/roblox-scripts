@@ -4,7 +4,7 @@ a.bindable = game:GetService("CoreGui"):FindFirstChild("teleporter") or Instance
 _G.canTeleport = false;
 
 a.bindable.OnInvoke = function()
-	if not game:service"Players".LocalPlayer:FindFirstChild("SecurityBypass") then
+	if not _G.canTeleport then
 		repeat wait() until not game:service"Players".LocalPlayer:FindFirstChild("LastSpawned");
 		_G.canTeleport = true
 		game:GetService("ReplicatedStorage").Remotes.Sync:InvokeServer("Player", "SpawnCharacter")
@@ -12,7 +12,8 @@ a.bindable.OnInvoke = function()
 		delay(8, function()
 			_G.canTeleport = false
 		end)
-
+		
+		print(game:service"Players".LocalPlayer:FindFirstChild('SecurityBypass'));
 		return wait(3)
 	else 
 		return wait(1.5)
