@@ -68,7 +68,7 @@ function TPReturner()
 					wait()
 					game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
 				end)
-				wait()
+				wait(1);
 			end
 		end
 	end
@@ -157,7 +157,7 @@ pcall(function()
 		end
 		aa = aa + 1;
 		print(aa);
-		wait(1);
+		wait(1.25);
 	end
 	syn.queue_on_teleport(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/demonfall%20trinket%20tp%20serverhop.lua"));
 	local success = pcall(Teleport);
