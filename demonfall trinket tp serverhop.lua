@@ -12,10 +12,9 @@ local rs = game:service"ReplicatedStorage";
 local ws = game:service"Workspace";
 local runs = game:service"RunService";
 
-if lp.PlayerGui:FindFirstChild("LoadingScreen") then firesignal(lp.PlayerGui.LoadingScreen.Background.Loading.Skip.MouseButton1Click); end
+if lp.PlayerGui:FindFirstChild("LoadingScreen") then firesignal(lp.PlayerGui.LoadingScreen.Background.Loading.Skip.MouseButton1Click); wait(12.5); end
     
 repeat wait() until lp.Character;
-wait(15);
 
 local PlaceID = game.PlaceId
 local AllIDs = {}
