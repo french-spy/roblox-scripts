@@ -128,7 +128,6 @@ end
 pcall(function()
 	local aa = 0;
 	while _G.trinketFarm and aa < 100 do wait()
-		print(aa);
 		local closest = getClosestTrinket();
 		repeat wait()
 			closest = getClosestTrinket();
@@ -157,6 +156,7 @@ pcall(function()
 			repeat wait() rs.Remotes.Async:FireServer("Character", "Interaction", trinket); until not closest:FindFirstChild("Spawned") or not trinket
 		end
 		aa = aa + 1;
+		print(aa);
 		wait(1);
 	end
 	syn.queue_on_teleport(game:HttpGet());
