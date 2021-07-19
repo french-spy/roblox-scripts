@@ -128,6 +128,7 @@ end
 pcall(function()
 	local aa = 0;
 	while _G.trinketFarm and aa < 100 do wait()
+		print(aa);
 		local closest = getClosestTrinket();
 		repeat wait()
 			closest = getClosestTrinket();
