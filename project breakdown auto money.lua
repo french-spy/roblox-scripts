@@ -9,78 +9,45 @@ function TPBypass(X, Y, Z)
     local Pos = lp.Character.HumanoidRootPart.Position;
     local CurY = Pos.Y;
     while CurY > -24 do
-        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X, CurY - 2, Pos.Z);
-        CurY = CurY - 1;
+        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X, CurY - _G.speed, Pos.Z);
+        CurY = CurY - _G.speed;
         wait();
     end
     while CurY < -26 do
-        lp.HumanoidRootPart.CFrame = CFrame.new(Pos.X, Pos.Y + 2, Pos.Z);
-        CurY = CurY + 1;
+        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X, Pos.Y + _G.speed, Pos.Z);
+        CurY = CurY + _G.speed;
         wait();
     end
-    workspace.Gravity = 1;
+    workspace.Gravity = 0;
     while lp.Character.HumanoidRootPart.Position.X < NX - 7 do
         local Pos = lp.Character.HumanoidRootPart.Position;
-        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X + 6, Pos.Y, Pos.Z);
+        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X + _G.speed, Pos.Y, Pos.Z);
         wait();
     end
     while lp.Character.HumanoidRootPart.Position.X > NX + 7 do
         local Pos = lp.Character.HumanoidRootPart.Position;
-        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X - 6, Pos.Y, Pos.Z);
+        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X - _G.speed, Pos.Y, Pos.Z);
         wait();
     end
     while lp.Character.HumanoidRootPart.Position.Z < NZ - 7 do
         local Pos = lp.Character.HumanoidRootPart.Position;
-        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X, Pos.Y, Pos.Z + 6);
+        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X, Pos.Y, Pos.Z + _G.speed);
         wait();
     end
     while lp.Character.HumanoidRootPart.Position.Z > NZ + 7 do
         local Pos = lp.Character.HumanoidRootPart.Position;
-        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X, Pos.Y, Pos.Z - 6);
+        lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X, Pos.Y, Pos.Z - _G.speed);
         wait();
     end
     local Pos = lp.Character.HumanoidRootPart.Position;
     local CurY = Pos.Y;
     while CurY < NY + 3 do
         lp.Character.HumanoidRootPart.CFrame = CFrame.new(Pos.X, CurY, Pos.Z);
-        CurY = CurY + 1;
+        CurY = CurY + _G.speed;
         wait();
     end
     lp.Character.HumanoidRootPart.CFrame = CFrame.new(X, Y, Z);
     workspace.Gravity = 196.19999694824;
-end
-
-local function moveTo(humanoid, targetPoint, andThen)
-	local targetReached = false;
- 
-	local connection;
-	connection = humanoid.MoveToFinished:Connect(function(reached)
-		targetReached = true;
-		connection:Disconnect();
-		connection = nil;
-		if andThen then
-			andThen();
-		end
-	end)
-	humanoid:MoveTo(targetPoint)
- 
-	coroutine.wrap(function()
-		while not targetReached do
-			if not (humanoid and humanoid.Parent) then
-				break;
-			end
-			if humanoid.WalkToPoint ~= targetPoint then
-				break;
-			end
-			humanoid:MoveTo(targetPoint);
-			wait(6);
-		end
-		
-		if connection then
-			connection:Disconnect();
-			connection = nil;
-		end
-	end)();
 end
 
 coroutine.wrap(function()
@@ -122,21 +89,21 @@ coroutine.wrap(function()
                 if lp.Character:FindFirstChild("Mission") then
                     local dest = ws.PizzaLocations:FindFirstChild(lp.Character:FindFirstChild("Mission").Location.Value);
                     TPBypass(dest.Position.X, dest.Position.Y, dest.Position.Z - 10);
-                    moveTo(lp.Character.Humanoid, dest.Position);
-                    wait(1);
+                    lp.Character.Humanoid:MoveTo(dest.Position);
+                    repeat wait() until (dest.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 5
+                    wait(0.5);
                     TPBypass(ws.Missions.PizzaDelivery.Position.X, ws.Missions.PizzaDelivery.Position.Y, ws.Missions.PizzaDelivery.Position.Z + 7);
-                    wait(1);
-                    fireclickdetector(ws.Missions.PizzaDelivery.ClickDetector);
-                    wait(1);
+                    wait(0.5);
+                    repeat wait(); fireclickdetector(ws.Missions.PizzaDelivery.ClickDetector); until lp.Character:FindFirstChild("Mission");
                 else
                     TPBypass(ws.Missions.PizzaDelivery.Position.X, ws.Missions.PizzaDelivery.Position.Y, ws.Missions.PizzaDelivery.Position.Z + 7);
-                    wait(1);
-                    fireclickdetector(ws.Missions.PizzaDelivery.ClickDetector)
-                    wait(1);
+                    wait(0.5);
+                    repeat wait(); fireclickdetector(ws.Missions.PizzaDelivery.ClickDetector); until lp.Character:FindFirstChild("Mission");
                     local dest = ws.PizzaLocations:FindFirstChild(lp.Character:FindFirstChild("Mission").Location.Value);
                     TPBypass(dest.Position.X, dest.Position.Y, dest.Position.Z - 10);
-                    moveTo(lp.Character.Humanoid, dest.Position);
-                    wait(1);
+                    lp.Character.Humanoid:MoveTo(dest.Position);
+                    repeat wait() until (dest.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 5
+                    wait(0.5);
                 end
             end
         end
