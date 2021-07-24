@@ -52,22 +52,20 @@ end
 
 coroutine.wrap(function()
     pcall(function()
-        while wait() do
+        runs.RenderStepped:Connect(function()
             for i,v in pairs(lp.Character:GetDescendants()) do
-                if v:IsA("Accessory") or v:IsA("Shirt") or v:IsA("Pants") or v.Name == "face" then
+                if v:IsA("Accessory") or v:IsA("Shirt") or v:IsA("Pants") or v.Name == "face" or v.Name:find("Arm") or v.Name:find("Leg") then
                     v:Destroy();
                 end
             end
-        end
+        end)
     end)
 end)();
 coroutine.wrap(function()
     pcall(function()
-        while wait() do
-            if lp.Character then
-                lp.Character.Humanoid.NameDisplayDistance = 0;
-            end
-        end
+        runs.RenderStepped:Connect(function()
+            lp.Character.Humanoid.NameDisplayDistance = 0;
+        end)
     end) 
 end)();
 
@@ -84,7 +82,6 @@ end)();
 coroutine.wrap(function()
     pcall(function()
         while wait() do
-            lp.Bypass.Value = true;
             if _G.autoPizza and lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") then
                 if lp.Character:FindFirstChild("Mission") then
                     local dest = ws.PizzaLocations:FindFirstChild(lp.Character:FindFirstChild("Mission").Location.Value);
@@ -94,11 +91,11 @@ coroutine.wrap(function()
                     wait(0.5);
                     TPBypass(ws.Missions.PizzaDelivery.Position.X, ws.Missions.PizzaDelivery.Position.Y, ws.Missions.PizzaDelivery.Position.Z + 7);
                     wait(0.5);
-                    repeat wait(); fireclickdetector(ws.Missions.PizzaDelivery.ClickDetector); until lp.Character:FindFirstChild("Mission");
+                    repeat wait(); lp.Character.HumanoidRootPart.CFrame = ws.Missions.PizzaDelivery.CFrame; fireclickdetector(ws.Missions.PizzaDelivery.ClickDetector); until lp.Character:FindFirstChild("Mission");
                 else
                     TPBypass(ws.Missions.PizzaDelivery.Position.X, ws.Missions.PizzaDelivery.Position.Y, ws.Missions.PizzaDelivery.Position.Z + 7);
                     wait(0.5);
-                    repeat wait(); fireclickdetector(ws.Missions.PizzaDelivery.ClickDetector); until lp.Character:FindFirstChild("Mission");
+                    repeat wait(); lp.Character.HumanoidRootPart.CFrame = ws.Missions.PizzaDelivery.CFrame; fireclickdetector(ws.Missions.PizzaDelivery.ClickDetector); until lp.Character:FindFirstChild("Mission");
                     local dest = ws.PizzaLocations:FindFirstChild(lp.Character:FindFirstChild("Mission").Location.Value);
                     TPBypass(dest.Position.X, dest.Position.Y, dest.Position.Z - 10);
                     lp.Character.Humanoid:MoveTo(dest.Position);
