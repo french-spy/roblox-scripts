@@ -4,6 +4,9 @@ a.bindable = game:GetService("CoreGui"):FindFirstChild("teleporter") or Instance
 _G.canTeleport = false;
 
 a.bindable.OnInvoke = function()
+	for i,v in next, getconnections(game:service"UserInputService".WindowFocusReleased) do
+	    v:Disable();
+	end
 	if not _G.canTeleport then
 		repeat wait() until not game:service"Players".LocalPlayer:FindFirstChild("LastSpawned");
 		_G.canTeleport = true
