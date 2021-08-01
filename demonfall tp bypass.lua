@@ -15,8 +15,6 @@ a.bindable.OnInvoke = function()
 		delay(7, function()
 			_G.canTeleport = false
 		end)
-		
-		print(game:service"Players".LocalPlayer:FindFirstChild('SecurityBypass'));
 		return wait(3)
 	else 
 		return wait(1.5)
