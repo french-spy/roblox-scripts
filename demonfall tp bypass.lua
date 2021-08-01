@@ -9,7 +9,7 @@ a.bindable.OnInvoke = function()
 		_G.canTeleport = true
 		game:GetService("ReplicatedStorage").Remotes.Sync:InvokeServer("Player", "SpawnCharacter")
 
-		delay(8, function()
+		delay(7, function()
 			_G.canTeleport = false
 		end)
 		
