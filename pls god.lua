@@ -10,6 +10,7 @@ _G.notExecuted = true; --dont touch
 		repeat wait() until game:IsLoaded();
 		wait(5.5);
 		print("GameLoaded");
+		game:WaitForChild("Players"):WaitForChild("LocalPlayer"):WaitForChild("PlayerGui"):WaitForChild("LoadingScreen");
 		
 		if #game.Players:GetChildren() == 1 then
 			local lp = game:service"Players".LocalPlayer;
@@ -53,7 +54,7 @@ _G.notExecuted = true; --dont touch
 			end)();
 			print("InfM1sOn");
 		
-			wait(7);
+			wait(2);
 			local instances = {
 				"Busy";
 				"Ragdoll";
