@@ -65,8 +65,8 @@ for i,v in pairs(ws:GetChildren()) do
 end
 
 ws.ChildAdded:Connect(function(v)
-    if v and v:IsDescendantOf(game) and v:FindFirstChild("Configuration") and v.Configuration:IsA("Configuration") and v:FindFirstChild("PickableItem") and v:FindFirstChildWhichIsA("MeshPart") then
-        --print(v.Name .. " spawned");
+    if v and v:IsDescendantOf(game) then
+        v:WaitForChild("Configuration");
         pcall(makeEsp, v);    
     end
 end)
