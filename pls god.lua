@@ -10,7 +10,9 @@ _G.notExecuted = true; --dont touch
 		repeat wait() until game:IsLoaded();
 		wait(5.5);
 		print("GameLoaded");
-		game:WaitForChild("Players"):WaitForChild("LocalPlayer"):WaitForChild("PlayerGui"):WaitForChild("LoadingScreen");
+		game:WaitForChild("Players");
+		repeat wait() until game.Players.LocalPlayer;
+		game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("LoadingScreen");
 		
 		if #game.Players:GetChildren() == 1 then
 			local lp = game:service"Players".LocalPlayer;
