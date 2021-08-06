@@ -5,6 +5,9 @@ local runs = game.RunService;
 _G.itemFarm = true;
 _G.foundItem = false; --Dont touch
 
+_G.currentCoord = nil;
+_G.currentPos = nil;
+
 --TP Bypass starts here
 local gc = getgc(true);
 local key = nil;
@@ -128,11 +131,11 @@ local itemSpawns =
 --Functions for grabbing items start here
 local function grabItem()
 	for i,v in pairs(ws.Item_Spawns.Items:GetChildren()) do
-		if v:IsA("Model") and v:FindFirstChildWhichIsA("MeshPart") and v:FindFirstChildWhichIsA("ClickDetector") then
-			local mp = v:FindFirstChildWhichIsA("MeshPart");
+		if v:IsA("Model") and v:FindFirstChildWhichIsA("MeshPart") or v:FindFirstChildWhichIsA("Part") and v:FindFirstChildWhichIsA("ClickDetector") then
+			local mp = v:FindFirstChildWhichIsA("MeshPart") or v:FindFirstChildWhichIsA("Part");
 			if (mp.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 10 then
 				print("Magnitude check passed");
-				if mp.Transparency == 0 then
+				if mp.Transparency ~= 1 then
 					print("Valid item check passed");
 					lp.Character.Humanoid:MoveTo(mp.Position);
 					repeat wait() until (mp.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 5;
@@ -146,9 +149,9 @@ local function grabItem()
 end
 
 local function grabFoundItem(v)
-	if v:IsA("Model") and v:FindFirstChildWhichIsA("MeshPart") and v:FindFirstChildWhichIsA("ClickDetector") then
-		local mp = v:FindFirstChildWhichIsA("MeshPart");
-		if mp.Transparency == 0 then
+	if v:IsA("Model") and v:FindFirstChildWhichIsA("MeshPart") or v:FindFirstChildWhichIsA("Part") and v:FindFirstChildWhichIsA("ClickDetector") then
+		local mp = v:FindFirstChildWhichIsA("MeshPart") or v:FindFirstChildWhichIsA("Part");
+		if mp.Transparency ~= 1 then
 			print("Valid item check passed(found item)");
 			lp.Character.HumanoidRootPart.CFrame = CFrame.new(mp.Position);
 			wait(1);
