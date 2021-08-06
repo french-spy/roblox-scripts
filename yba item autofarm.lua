@@ -1,12 +1,14 @@
 local ws = workspace;
 local lp = game.Players.LocalPlayer;
-local runs = game.RunService;
 
 _G.itemFarm = true;
 _G.foundItem = false; --Dont touch
 _G.grabbingItem = false;
+_G.space = true;
+_G.itemsToSkip = {};
 
 --TP Bypass starts here
+--This is used to get the return key in case they change it
 local gc = getgc(true);
 local key = nil;
 for i = #gc, 1, -1 do
@@ -48,6 +50,7 @@ coroutine.wrap(function()
 end)();
 --Hide Character ends here
 
+--Coords I took from https://discord.gg/rs9FCkMX5u
 local itemSpawns = 
 {
 	CFrame.new(-413.53112792969,  827.54278564453, 42.011169433594),
@@ -136,11 +139,19 @@ local function grabItem()
 				if mp.Transparency ~= 1 then
 					print("Valid item check passed");
 					_G.grabbingItem = true;
-					lp.Character.Humanoid:MoveTo(mp.Position);
-					repeat wait() until (mp.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 5;
+					lp.Character.HumanoidRootPart.CFrame = CFrame.new(mp.Position) * CFrame.new(0, 3, 0);
+					wait(0.85);
 					if v:FindFirstChildWhichIsA("ClickDetector") then
 						fireclickdetector(v:FindFirstChildWhichIsA("ClickDetector"));
+						for i = 1, 4 do wait() 
+							if (lp.PlayerGui:FindFirstChild("Message") and lp.PlayerGui.Message:FindFirstChild("TextLabel")) then
+								if string.match(lp.PlayerGui.Message.TextLabel.Text, "You can't have more than") then
+									v:Destroy();
+								end
+							end
+						end
 					end
+					wait(0.3);
 					_G.grabbingItem = false;
 				end
 			end
@@ -154,11 +165,19 @@ local function grabFoundItem(v)
 		if mp.Transparency ~= 1 then
 			print("Valid item check passed(found item)");
 			_G.grabbingItem = true;
-			lp.Character.HumanoidRootPart.CFrame = CFrame.new(mp.Position);
-			wait(1);
+			lp.Character.HumanoidRootPart.CFrame = CFrame.new(mp.Position) * CFrame.new(0, 3, 0);
+			wait(0.85);
 			if v:FindFirstChildWhichIsA("ClickDetector") then
 				fireclickdetector(v:FindFirstChildWhichIsA("ClickDetector"));
+				for i = 1, 4 do wait() 
+					if (lp.PlayerGui:FindFirstChild("Message") and lp.PlayerGui.Message:FindFirstChild("TextLabel")) then
+						if string.match(lp.PlayerGui.Message.TextLabel.Text, "You can't have more than") then
+							v:Destroy();
+						end
+					end
+				end
 			end
+			wait(0.3);
 			_G.grabbingItem = false;
 		end
 	end
@@ -174,7 +193,7 @@ coroutine.wrap(function()
 			for i,v in pairs(ws.Item_Spawns.Items:GetChildren()) do
 				if (lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")) then
 					grabFoundItem(v);
-					wait(1);
+					wait(0.85);
 					_G.foundItem = false;
 				end	
 			end
@@ -189,9 +208,9 @@ while wait() do
 			if _G.grabbingItem then repeat wait() until not _G.grabbingItem; end
 			if (lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")) then
 				lp.Character.HumanoidRootPart.CFrame = v;
-				wait(1);
+				wait(0.85);
 				grabItem();
-				wait(1);
+				wait(0.85);
 			end
 		end
 	end	
