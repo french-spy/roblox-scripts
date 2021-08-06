@@ -4,9 +4,7 @@ local runs = game.RunService;
 
 _G.itemFarm = true;
 _G.foundItem = false; --Dont touch
-
-_G.currentCoord = nil;
-_G.currentPos = nil;
+_G.grabbingItem = false;
 
 --TP Bypass starts here
 local gc = getgc(true);
@@ -137,11 +135,13 @@ local function grabItem()
 				print("Magnitude check passed");
 				if mp.Transparency ~= 1 then
 					print("Valid item check passed");
+					_G.grabbingItem = true;
 					lp.Character.Humanoid:MoveTo(mp.Position);
 					repeat wait() until (mp.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 5;
 					if v:FindFirstChildWhichIsA("ClickDetector") then
 						fireclickdetector(v:FindFirstChildWhichIsA("ClickDetector"));
 					end
+					_G.grabbingItem = false;
 				end
 			end
 		end
@@ -153,11 +153,13 @@ local function grabFoundItem(v)
 		local mp = v:FindFirstChildWhichIsA("MeshPart") or v:FindFirstChildWhichIsA("Part");
 		if mp.Transparency ~= 1 then
 			print("Valid item check passed(found item)");
+			_G.grabbingItem = true;
 			lp.Character.HumanoidRootPart.CFrame = CFrame.new(mp.Position);
 			wait(1);
 			if v:FindFirstChildWhichIsA("ClickDetector") then
 				fireclickdetector(v:FindFirstChildWhichIsA("ClickDetector"));
 			end
+			_G.grabbingItem = false;
 		end
 	end
 end
@@ -167,6 +169,7 @@ end
 coroutine.wrap(function()
 	while wait() do
 		if _G.itemFarm and #(ws.Item_Spawns.Items:GetChildren()) >= 1 then
+			if _G.grabbingItem then repeat wait() until not _G.grabbingItem; end
 			_G.foundItem = true;
 			for i,v in pairs(ws.Item_Spawns.Items:GetChildren()) do
 				if (lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")) then
@@ -183,6 +186,7 @@ while wait() do
 	if _G.itemFarm then
 		for i,v in ipairs(itemSpawns) do
 			if _G.foundItem then repeat wait() until not _G.foundItem; end
+			if _G.grabbingItem then repeat wait() until not _G.grabbingItem; end
 			if (lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")) then
 				lp.Character.HumanoidRootPart.CFrame = v;
 				wait(1);
