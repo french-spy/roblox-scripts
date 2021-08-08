@@ -140,7 +140,7 @@ local function grabItem()
 					print("Valid item check passed");
 					_G.grabbingItem = true;
 					lp.Character.HumanoidRootPart.CFrame = CFrame.new(mp.Position) * CFrame.new(0, 3, 0);
-					wait(0.85);
+					wait(0.8);
 					if v:FindFirstChildWhichIsA("ClickDetector") then
 						fireclickdetector(v:FindFirstChildWhichIsA("ClickDetector"));
 						for i = 1, 4 do wait() 
@@ -151,7 +151,7 @@ local function grabItem()
 							end
 						end
 					end
-					wait(0.3);
+					wait(0.25);
 					_G.grabbingItem = false;
 				end
 			end
@@ -166,7 +166,7 @@ local function grabFoundItem(v)
 			print("Valid item check passed(found item)");
 			_G.grabbingItem = true;
 			lp.Character.HumanoidRootPart.CFrame = CFrame.new(mp.Position) * CFrame.new(0, 3, 0);
-			wait(0.85);
+			wait(0.8);
 			if v:FindFirstChildWhichIsA("ClickDetector") then
 				fireclickdetector(v:FindFirstChildWhichIsA("ClickDetector"));
 				for i = 1, 4 do wait() 
@@ -177,7 +177,7 @@ local function grabFoundItem(v)
 					end
 				end
 			end
-			wait(0.3);
+			wait(0.25);
 			_G.grabbingItem = false;
 		end
 	end
@@ -193,7 +193,7 @@ coroutine.wrap(function()
 			for i,v in pairs(ws.Item_Spawns.Items:GetChildren()) do
 				if (lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")) then
 					grabFoundItem(v);
-					wait(0.85);
+					wait(0.8);
 					_G.foundItem = false;
 				end	
 			end
@@ -208,9 +208,9 @@ while wait() do
 			if _G.grabbingItem then repeat wait() until not _G.grabbingItem; end
 			if (lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")) then
 				lp.Character.HumanoidRootPart.CFrame = v;
-				wait(0.85);
+				wait(0.8);
 				grabItem();
-				wait(0.85);
+				wait(0.8);
 			end
 		end
 	end	
