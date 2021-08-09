@@ -44,7 +44,7 @@ coroutine.wrap(function()
 					v:Destroy();
 				end
 			end
-			if lp.Character.Head:FindFirstChild("face") then lp.Character.Head.face:Destroy(); end
+			if lp.Character:FindFirstChild("Head") then lp.Character.Head.Parent = nil end
 		end
 	end
 end)();
