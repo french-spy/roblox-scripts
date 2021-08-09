@@ -38,13 +38,13 @@ end);
 coroutine.wrap(function()
 	while wait() do
 		if (lp.Character and lp.Character:FindFirstChild("Humanoid")) and lp.Character:FindFirstChild("Head") then
+			lp.Character.Humanoid.NameDisplayDistance = 0;
 			for i,v in pairs(lp.Character:GetChildren()) do
 				if v:IsA("Accessory") or v:IsA("Pants") or v:IsA("Shirt") then
 					v:Destroy();
 				end
 			end
 			if lp.Character.Head:FindFirstChild("face") then lp.Character.Head.face:Destroy(); end
-			if lp.Character:FindFirstChild("Head") then lp.Character.Head.Parent = nil; end
 		end
 	end
 end)();
