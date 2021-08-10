@@ -1,5 +1,17 @@
+repeat wait() until game:IsLoaded();
+
 local lp = game.Players.LocalPlayer;
+local lp;
+repeat wait()
+	pcall(function() lp = game.Players.LocalPlayer; end);
+until lp
 local ws = workspace;
+local vu = game.VirtualUser;
+
+lp:WaitForChild("PlayerGui"):WaitForChild("StartGUI");
+vu:Button1Down(Vector2.new(0, 0), ws.CurrentCamera.CFrame);
+wait(0.1);
+vu:Button1Up(Vector2.new(0, 0), ws.CurrentCamera.CFrame);
 
 local PlaceID = game.PlaceId
 local AllIDs = {}
