@@ -1,4 +1,5 @@
 repeat wait() until game:IsLoaded();
+wait(5);
 
 local lp = game.Players.LocalPlayer;
 local lp;
