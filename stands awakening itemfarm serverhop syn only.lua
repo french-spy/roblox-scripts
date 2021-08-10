@@ -81,7 +81,7 @@ for i=0,3 do wait()
 	end
 end
 
-syn.queue_on_teleport(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/stands%20awakening%20itemfarm%20serverhop%20syn%20only.lua"))();
+syn.queue_on_teleport(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/stands%20awakening%20itemfarm%20serverhop%20syn%20only.lua"));
 local sucess
 repeat wait()
 	success = pcall(Teleport);
