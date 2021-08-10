@@ -1,3 +1,5 @@
+if game.PlaceId == 5780309044 then
+repeat wait() until game:IsLoaded();
 local lp = game.Players.LocalPlayer;
 local ws = workspace;
 
@@ -85,3 +87,4 @@ local sucess
 repeat wait()
 	success = pcall(Teleport);
 until success
+end
