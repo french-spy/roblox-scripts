@@ -81,10 +81,8 @@ oldNewIndex = hookmetamethod(game, "__newindex", function(self, index, value)
 		local oldFunc = value;
 		value = function(...)
 			local itemData = select(2, ...);
-			--pcall(function()
-				table.foreach(itemData, print);
-				_G.items[itemData.Replica.Name] = {CFrame = itemData.CFrame, clickDetector = itemData.CD, Name = itemData.Replica.Name};				
-			--end)
+			--table.foreach(itemData, print);
+			_G.items[itemData.Replica.Name] = {CFrame = itemData.CFrame, clickDetector = itemData.CD, Name = itemData.Replica.Name};				
 			return oldFunc(...);
 		end
 	end
@@ -94,20 +92,20 @@ getscriptclosure(game:GetService("ReplicatedFirst"):WaitForChild("ItemSpawn"))()
 
 while wait() do
 	if (_G.itemFarm and getTableLength(_G.items) >= 1) then
-		print("Yes");
+		--print("Yes");
 		for i,v in pairs(_G.items) do
 			if (lp.Character and lp.Character.PrimaryPart) then
-				print("Yes2");
+				--print("Yes2");
 				lp.Character.PrimaryPart.CFrame = v.CFrame;
 				wait(0.5);
 				for i2,v2 in pairs(ws.Item_Spawns.Items:GetChildren()) do
 					if v2:IsA("Model") and v2:FindFirstChildWhichIsA("MeshPart") or v2:FindFirstChildWhichIsA("Part") then
-						print("Yes3");
+						--print("Yes3");
 						local br = v2:FindFirstChildWhichIsA("MeshPart") or v2:FindFirstChildWhichIsA("Part");
 						if (br.Position - lp.Character.PrimaryPart.Position).magnitude <= 5 then
-							print("Yes4");
+							--print("Yes4");
 							if br.Transparency ~= 1 then
-								print("Yes5");
+								--print("Yes5");
 								if v.clickDetector:IsDescendantOf(game) then
 									fireclickdetector(v.clickDetector);
 									for i = 1, 4 do wait() 
