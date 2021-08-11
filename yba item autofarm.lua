@@ -69,6 +69,7 @@ wait(0.5);
 lp.Character.LowerTorso.Root:Destroy();
 wait(0.5);
 lp.Character.HumanoidRootPart.CFrame = oldPos;
+wait(0.5);
 
 --Hide Character starts here
 coroutine.wrap(function()
