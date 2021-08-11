@@ -27,12 +27,48 @@ old = hookmetamethod(game, "__namecall", function(self, ...)
         if key then return key;
 		else return "  ___XP DE KEY"; end
     end
+	if not checkcaller() and getnamecallmethod() == "InvokeServer" and args[1] == "Reset" then
+		return;
+	end
+	if not checkcaller() and getnamecallmethod() == "FireServer" and args[1] == "Reset" then
+		return;
+	end
     if not checkcaller() and getnamecallmethod() == "Kick" then
         return;
     end
     return old(self, ...);
 end);
+
+function srchTable(tbl, index)
+	local newTBL = {};
+	for i,v in pairs(tbl) do
+		table.insert(newTBL, tostring(v));
+	end
+	if table.find(newTBL, index) then
+		newTBL = nil;
+		return true;
+	end
+	return false;
+end
+
+(function()
+	for i,v in pairs(getgc()) do
+			if type(v) == "function" and tostring(getfenv(v).script) == 'Client' and #debug.getprotos(v) == 7 and srchTable(debug.getupvalues(v), "RemoteEvent") then
+				hookfunction(v, function()
+					return wait(9e9);
+				end);
+				break;
+			end
+		end
+end)();
 --TP Bypass ends here
+
+local oldPos = lp.Character.HumanoidRootPart.CFrame;
+lp.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(1750.6010742188, 770.61102294922, 50));
+wait(0.5);
+lp.Character.LowerTorso.Root:Destroy();
+wait(0.5);
+lp.Character.HumanoidRootPart.CFrame = oldPos;
 
 --Hide Character starts here
 coroutine.wrap(function()
