@@ -5,6 +5,19 @@ _G.itemFarm = true;
 _G.foundItem = false; --Dont touch
 _G.grabbingItem = false;
 
+--Table function
+function searchTable(t, index)
+	local temp = {};
+	for i,v in pairs(t) do
+		table.insert(temp, tostring(v));
+	end
+	if table.find(temp, index) then
+		temp = nil;
+		return true;
+	end
+	return false;
+end
+
 --TP Bypass starts here
 --This is used to get the return key in case they change it
 local gc = getgc(true);
@@ -18,35 +31,43 @@ for i = #gc, 1, -1 do
     end
 end
 
-local old;
-old = hookmetamethod(game, "__namecall", function(self, ...)
+local oldNamecall;
+oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
     local args = {...};
     if not checkcaller() and getnamecallmethod() == "InvokeServer" and tostring(self) == "Returner" and args[1] == "idklolbrah2de" then
         if key then return key;
 		else return "  ___XP DE KEY"; end
     end
+	if not checkcaller() and getnamecallmethod() == "InvokeServer" and args[1] == "Reset" then
+		return;
+	end
+	if not checkcaller() and getnamecallmethod() == "FireServer" and args[1] == "Reset" then
+		return;
+	end
     if not checkcaller() and getnamecallmethod() == "Kick" then
         return;
     end
-    return old(self, ...);
+    return oldNamecall(self, ...);
 end);
---TP Bypass ends here
 
---Hide Character starts here
-coroutine.wrap(function()
-	while wait() do
-		if (lp.Character and lp.Character:FindFirstChild("Humanoid")) and lp.Character:FindFirstChild("Head") then
-			lp.Character.Humanoid.NameDisplayDistance = 0;
-			for i,v in pairs(lp.Character:GetChildren()) do
-				if v:IsA("Accessory") or v:IsA("Pants") or v:IsA("Shirt") then
-					v:Destroy();
-				end
-			end
-			if lp.Character.Head:FindFirstChild("face") then lp.Character.Head.face:Destroy(); end
-		end
+for i,v in pairs(getgc()) do
+	if type(v) == "function" and tostring(getfenv(v).script) == 'Client' and #debug.getprotos(v) == 7 and searchTable(debug.getupvalues(v), "RemoteEvent") then
+		hookfunction(v, function()
+			return wait(9e9);
+		end);
+		break;
 	end
-end)();
---Hide Character ends here
+end
+wait(0.5);
+
+--Invis
+local oldPos = lp.Character.HumanoidRootPart.CFrame;
+lp.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(1750.6010742188, 770.61102294922, 50));
+wait(0.5);
+lp.Character.LowerTorso.Root:Destroy();
+wait(0.5);
+lp.Character.HumanoidRootPart.CFrame = oldPos;
+wait(0.5);
 
 --Coords I took from https://discord.gg/rs9FCkMX5u
 local itemSpawns = 
