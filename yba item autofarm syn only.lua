@@ -56,7 +56,7 @@ end);
 
 for i,v in pairs(getgc()) do
 	if type(v) == "function" and tostring(getfenv(v).script) == 'Client' and #debug.getprotos(v) == 7 and searchTable(debug.getupvalues(v), "RemoteEvent") then
-		hookfunction(v, function() return wait(9e9) end)
+		v = function() end;
 		break;
 	end
 end
