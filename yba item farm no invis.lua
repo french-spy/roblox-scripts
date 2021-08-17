@@ -62,15 +62,6 @@ for i,v in pairs(getgc()) do
 end
 wait(0.5);
 
---Invis
-local oldPos = lp.Character.HumanoidRootPart.CFrame;
-lp.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(1750.6010742188, 770.61102294922, 50));
-wait(0.5);
-lp.Character.LowerTorso.Root:Destroy();
-wait(0.5);
-lp.Character.HumanoidRootPart.CFrame = oldPos;
-wait(0.5);
-
 --Item farm
 _G.items = {};
 local oldNewIndex;
