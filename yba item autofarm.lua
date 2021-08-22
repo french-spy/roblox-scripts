@@ -150,7 +150,7 @@ local function grabItem()
 					break;
 				end
 			end
-			if (mp.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 5 then
+			if mp and (mp.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 5 then
 				--print("Magnitude check passed");
 				if mp.Transparency ~= 1 then
 					--print("Valid item check passed");
@@ -184,7 +184,7 @@ local function grabFoundItem(v)
 				break;
 			end
 		end
-		if mp.Transparency ~= 1 then
+		if mp and mp.Transparency ~= 1 then
 			--print("Valid item check passed(found item)");
 			_G.grabbingItem = true;
 			lp.Character.HumanoidRootPart.CFrame = CFrame.new(mp.Position) * CFrame.new(0, 3, 0);
