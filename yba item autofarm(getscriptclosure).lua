@@ -1,6 +1,6 @@
 local ws = workspace;
 local lp = game.Players.LocalPlayer;
-local getscriptclosure = getscriptclosure or getscriptfunction or get_script_function;
+getgenv().getscriptclosure = getscriptclosure or getscriptfunction or get_script_function;
 
 _G.itemFarm = true;
 
@@ -109,8 +109,8 @@ while wait() do
 							end
 						end
 					end
-					_G.items[i] = nil;
 				end
+				G.items[i] = nil;
 				wait(0.5);
 			end
 		end
