@@ -143,11 +143,17 @@ local itemSpawns =
 local function grabItem()
 	for i,v in pairs(ws.Item_Spawns.Items:GetChildren()) do
 		if v:IsA("Model") and v:FindFirstChildWhichIsA("MeshPart") or v:FindFirstChildWhichIsA("Part") and v:FindFirstChildWhichIsA("ClickDetector") then
-			local mp = v:FindFirstChildWhichIsA("MeshPart") or v:FindFirstChildWhichIsA("Part");
-			if (mp.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 10 then
-				print("Magnitude check passed");
+			local mp;
+			for i2,val in pairs(v:GetChildren()) do
+				if ((val:IsA("Part") or val:IsA("MeshPart")) and val.Transparency ~= 1) then
+					mp = val;
+					break;
+				end
+			end
+			if (mp.Position - lp.Character.HumanoidRootPart.Position).magnitude <= 5 then
+				--print("Magnitude check passed");
 				if mp.Transparency ~= 1 then
-					print("Valid item check passed");
+					--print("Valid item check passed");
 					_G.grabbingItem = true;
 					lp.Character.HumanoidRootPart.CFrame = CFrame.new(mp.Position) * CFrame.new(0, 3, 0);
 					wait(0.7);
@@ -171,9 +177,15 @@ end
 
 local function grabFoundItem(v)
 	if v:IsA("Model") and v:FindFirstChildWhichIsA("MeshPart") or v:FindFirstChildWhichIsA("Part") and v:FindFirstChildWhichIsA("ClickDetector") then
-		local mp = v:FindFirstChildWhichIsA("MeshPart") or v:FindFirstChildWhichIsA("Part");
+		local mp;
+		for i,val in pairs(v:GetChildren()) do
+			if ((val:IsA("Part") or val:IsA("MeshPart")) and val.Transparency ~= 1) then
+				mp = val;
+				break;
+			end
+		end
 		if mp.Transparency ~= 1 then
-			print("Valid item check passed(found item)");
+			--print("Valid item check passed(found item)");
 			_G.grabbingItem = true;
 			lp.Character.HumanoidRootPart.CFrame = CFrame.new(mp.Position) * CFrame.new(0, 3, 0);
 			wait(0.7);
