@@ -107,9 +107,9 @@ while wait() do
 									end
 								end
 							end
-							_G.items[i] = nil;
 						end
 					end
+					_G.items[i] = nil;
 				end
 				wait(0.5);
 			end
