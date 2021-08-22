@@ -1,5 +1,6 @@
 local ws = workspace;
 local lp = game.Players.LocalPlayer;
+local getscriptclosure = getscriptclosure or getscriptfunction or get_script_function;
 
 _G.itemFarm = true;
 
@@ -62,15 +63,6 @@ for i,v in pairs(getgc()) do
 end
 wait(0.5);
 
---Invis
-local oldPos = lp.Character.HumanoidRootPart.CFrame;
-lp.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(1750.6010742188, 770.61102294922, 50));
-wait(0.5);
-lp.Character.LowerTorso.Root:Destroy();
-wait(0.5);
-lp.Character.HumanoidRootPart.CFrame = oldPos;
-wait(0.5);
-
 --Item farm
 _G.items = {};
 local oldNewIndex;
@@ -90,32 +82,32 @@ getscriptclosure(game:GetService("ReplicatedFirst"):WaitForChild("ItemSpawn"))()
 
 while wait() do
 	if (_G.itemFarm and getTableLength(_G.items) >= 1) then
-		--print("Yes");
 		for i,v in pairs(_G.items) do
 			if (lp.Character and lp.Character.PrimaryPart) then
-				--print("Yes2");
 				lp.Character.PrimaryPart.CFrame = v.CFrame;
 				wait(0.5);
-				for i2,v2 in pairs(ws.Item_Spawns.Items:GetChildren()) do
-					if v2:IsA("Model") and v2:FindFirstChildWhichIsA("MeshPart") or v2:FindFirstChildWhichIsA("Part") then
-						--print("Yes3");
-						local br = v2:FindFirstChildWhichIsA("MeshPart") or v2:FindFirstChildWhichIsA("Part");
-						if (br.Position - lp.Character.PrimaryPart.Position).magnitude <= 5 then
-							--print("Yes4");
-							if br.Transparency ~= 1 then
-								--print("Yes5");
-								if v.clickDetector:IsDescendantOf(game) then
-									fireclickdetector(v.clickDetector);
-									for i = 1, 4 do wait() 
-										if (lp.PlayerGui:FindFirstChild("Message") and lp.PlayerGui.Message:FindFirstChild("TextLabel")) then
-											if string.match(lp.PlayerGui.Message.TextLabel.Text, "You can't have more than") then
-												_G.items[i] = nil;
-											end
-										end
+				local br;
+				for i2,v2 in pairs(v.clickDetector.Parent:GetChildren()) do
+					if v2:IsA("MeshPart") or v2:IsA("Part") then
+						if v2.Transparency ~= 1 then
+							br = v2;
+							break;
+						end
+					end
+				end
+				if br and (br.Position - lp.Character.PrimaryPart.Position).magnitude <= 5 then
+					if br.Transparency ~= 1 then
+						local cd = v.clickDetector;
+						if cd:IsDescendantOf(game) then
+							fireclickdetector(cd);
+							for i = 1, 4 do wait() 
+								if (lp.PlayerGui:FindFirstChild("Message") and lp.PlayerGui.Message:FindFirstChild("TextLabel")) then
+									if string.match(lp.PlayerGui.Message.TextLabel.Text, "You can't have more than") then
+										_G.items[i] = nil;
 									end
-									_G.items[i] = nil;
 								end
 							end
+							_G.items[i] = nil;
 						end
 					end
 				end
