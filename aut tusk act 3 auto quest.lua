@@ -15,11 +15,11 @@ end
 noble();
 
 lp.PlayerGui.ChildAdded:Connect(function(c)
-    if v.Name == "DialogueGUI" and v:IsA("ScreenGui") and on3 then
-        v:WaitForChild("DialogueFrame");
+    if c.Name == "DialogueGUI" and c:IsA("ScreenGui") and on3 then
+        c:WaitForChild("DialogueFrame");
         wait(1);
-        if string.find(v.DialogueFrame.DialogueTXT.Text, "I shall guide you") then
-            firesignal(v.DialogueFrame.ResponseFrame:FindFirstChildWhichIsA("TextButton", true).MouseButton1Click);
+        if string.find(c.DialogueFrame.DialogueTXT.Text, "I shall guide you") then
+            firesignal(c.DialogueFrame.ResponseFrame:FindFirstChildWhichIsA("TextButton", true).MouseButton1Click);
         end
     end
 end)
