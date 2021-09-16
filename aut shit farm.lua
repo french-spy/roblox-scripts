@@ -14,7 +14,6 @@ coroutine.wrap(function()
     end)
 end)();
 
----[[
 coroutine.wrap(function()
     while wait() do
         if farm and to_farm[1] and lp.Character and lp.Character.PrimaryPart then
@@ -23,12 +22,14 @@ coroutine.wrap(function()
                     for i2,v2 in pairs(v:GetChildren()) do
                         if #(v2:GetChildren()) == 1 and lp.Character and lp.Character.PrimaryPart then
                             local a = v2:GetChildren()[1];
-                            if a:FindFirstChild("ProximityAttachment") and a.ProximityAttachment:FindFirstChild("Interaction") then
-                                lp.Character.PrimaryPart.CFrame = a.CFrame * CFrame.new(0, -5, 0);
-                                --print("Tping to " .. a:GetFullName());
-                                wait(0.25);
-                                fireproximityprompt(a.ProximityAttachment.Interaction, 10);
-                                wait(0.25);
+                            if a:FindFirstChildWhichIsA("ProximityPrompt", true) then
+                                lp.Character.PrimaryPart.CFrame = v2.CFrame * CFrame.new(0, -5, 0);
+                                wait(.25);
+                                --This check is here again cuz without it, it errors for no reason
+                                if a:FindFirstChildWhichIsA("ProximityPrompt", true) then
+                                    fireproximityprompt(a:FindFirstChildWhichIsA("ProximityPrompt", true), 10);
+                                end
+                                wait(.25);
                                 lp.Character.PrimaryPart.CFrame = CFrame.new(545.23822, 2369.11377, 386.453979, 0.0471762903, -0.0941329375, 0.994441271, 0, 0.995549798, 0.0942378566, -0.998886645, -0.00444579264, 0.0469663404);
                             end
                         end
@@ -39,4 +40,3 @@ coroutine.wrap(function()
         end
     end
 end)();
-----]]
