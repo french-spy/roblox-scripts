@@ -9,6 +9,8 @@ if game.PlaceId == 7484251959 then
     
     repeat wait() until lp.Character;
     
+    getgenv().item_farm = true;
+    
     local PlaceID = game.PlaceId
     local AllIDs = {}
     local foundAnything = ""
