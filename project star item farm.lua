@@ -30,7 +30,7 @@ coroutine.wrap(function()
 					if b and a then
 					    lp.Character.PrimaryPart.CFrame = b.CFrame * CFrame.new(0, -5, 0);
 					    wait(.25);
-					    fireproximityprompt(a, 10);
+					    fireproximityprompt(a);
 					    wait(.25);
 					end
 				end
