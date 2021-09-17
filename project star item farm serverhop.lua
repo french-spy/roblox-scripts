@@ -7,6 +7,8 @@ if game.PlaceId == 7484251959 then
     local ws = workspace;
     local run_s = game:service"RunService";
     
+    lp:Kick("the script is patched u scrub");
+    
     repeat wait() until lp.Character;
     
     getgenv().item_farm = true;
