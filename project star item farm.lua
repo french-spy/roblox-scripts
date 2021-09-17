@@ -26,12 +26,12 @@ coroutine.wrap(function()
             for i,v in pairs(ws.Drops.Active:GetChildren()) do
                 if not table.find(item_blacklist, v.Name) and v:FindFirstChildOfClass("ProximityPrompt", true) then
 					local a = v:FindFirstChildOfClass("ProximityPrompt", true);
-					local b = a:FindFirstAncestorOfClass("Part") or a:FindFirstAncestorOfClass("MeshPart") or a:FindFirstAncestorOfClass("Handle");
+					local b = v:FindFirstChildOfClass("Part") or v:FindFirstChildOfClass("MeshPart") or v:FindFirstChildOfClass("Handle");
 					if b and a then
-						lp.Character.PrimaryPart.CFrame = b.CFrame * CFrame.new(0, -5, 0);
-						wait(.25);
-						fireproximityprompt(v:FindFirstChildOfClass("ProximityPrompt", true), 10);
-						wait(.25);
+					    lp.Character.PrimaryPart.CFrame = b.CFrame * CFrame.new(0, -5, 0);
+					    wait(.25);
+					    fireproximityprompt(a, 10);
+					    wait(.25);
 					end
 				end
             end
