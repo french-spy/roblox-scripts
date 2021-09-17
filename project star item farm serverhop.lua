@@ -101,7 +101,7 @@ if game.PlaceId == 7484251959 then
     
     for i=0, 3 do wait()
         for i2,v in pairs(ws.Drops.Active:GetChildren()) do
-            if not table.find(item_blacklist, v.Name) and v:FindFirstChildOfClass("ProximityPrompt", true) then
+            if not table.find(item_blacklist, v.Name) and v:FindFirstChildOfClass("ProximityPrompt", true) or string.match(v.Name, "Arrow") then
                 local a = v:FindFirstChildOfClass("ProximityPrompt", true);
                 local b = v:FindFirstChildOfClass("Part") or v:FindFirstChildOfClass("MeshPart") or v:FindFirstChildOfClass("Handle");
                 if b and a then
