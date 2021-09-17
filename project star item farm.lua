@@ -3,9 +3,6 @@ local rs = game:service"ReplicatedStorage";
 local ws = workspace;
 local run_s = game:service"RunService";
 
-getgenv().item_farm = true;
-getgenv().hide_character = true;
-
 local instance_names = {"Torso", "Head", "Right Arm", "Left Arm", "Left Leg", "Right Leg"};
 coroutine.wrap(function()
 	run_s.RenderStepped:Connect(function()
