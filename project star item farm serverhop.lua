@@ -10,14 +10,11 @@ if game.PlaceId == 7484251959 then
     
     repeat wait() until lp.Character;
     
-	coroutine.wrap(function()
-    while wait() do
-        for i,v in pairs(rs.Detection:GetChildren()) do
-            v:Destroy(); 
-        end
-    end
-end)();
-wait(5);
+	local a = lp.Character.Humanoid:Clone();
+	a.Parent = lp.Character;
+	lp.Character.Humanoid:Destroy();
+	wait(1);
+	
     getgenv().item_farm = true;
     
     local PlaceID = game.PlaceId
