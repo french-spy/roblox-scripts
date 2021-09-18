@@ -4,14 +4,11 @@ local ws = workspace;
 local run_s = game:service"RunService";
 local ts = game:service"TweenService";
 
-coroutine.wrap(function()
-    while wait() do
-        for i,v in pairs(rs.Detection:GetChildren()) do
-            v:Destroy(); 
-        end
-    end
-end)();
-wait(5);
+local a = lp.Character.Humanoid:Clone();
+a.Parent = lp.Character;
+lp.Character.Humanoid:Destroy();
+wait(1);
+
 local instance_names = {"Torso", "Head", "Right Arm", "Left Arm", "Left Leg", "Right Leg"};
 coroutine.wrap(function()
 	---[[
