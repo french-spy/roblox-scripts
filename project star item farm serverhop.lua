@@ -11,7 +11,7 @@ if game.PlaceId == 7484251959 then
     repeat wait() until lp.Character;
     
 	for i,v in pairs(rs.Detection:GetChildren()) do v:Destroy(); end
-	
+	wait(1);
     getgenv().item_farm = true;
     
     local PlaceID = game.PlaceId
