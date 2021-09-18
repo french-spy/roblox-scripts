@@ -4,9 +4,6 @@ local ws = workspace;
 local run_s = game:service"RunService";
 local ts = game:service"TweenService";
 
-for i,v in pairs(rs.Detection:GetChildren()) do v:Destroy(); end
-wait(1);
-
 local instance_names = {"Torso", "Head", "Right Arm", "Left Arm", "Left Leg", "Right Leg"};
 coroutine.wrap(function()
 	---[[
