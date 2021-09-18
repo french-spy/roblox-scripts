@@ -17,7 +17,7 @@ if game.PlaceId == 7484251959 then
         end
     end
 end)();
-wait(1);
+wait(3);
     getgenv().item_farm = true;
     
     local PlaceID = game.PlaceId
