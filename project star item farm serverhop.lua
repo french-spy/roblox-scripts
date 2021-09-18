@@ -7,11 +7,8 @@ if game.PlaceId == 7484251959 then
     local ws = workspace;
     local run_s = game:service"RunService";
     local ts = game:service"TweenService";
-    getgenv().hide_character = true;
-    getgenv().item_blacklist = {"Banana", "Orebag", "Cactus Juice", "Tire", "Cabbage"}; --Case sensitive, wont pickup the items listed
-    getgenv().item_farm = true;
     
-    repeat wait() until lp.Character and lp.Character:FindFirstChild("Humanoid");
+    repeat wait() until lp.Character
 	
     getgenv().item_farm = true;
     
