@@ -4,6 +4,8 @@ local ws = workspace;
 local run_s = game:service"RunService";
 local ts = game:service"TweenService";
 
+for i,v in pairs(rs.Detection:GetChildren()) do v:Destroy(); end
+wait(1);
 local instance_names = {"Torso", "Head", "Right Arm", "Left Arm", "Left Leg", "Right Leg"};
 coroutine.wrap(function()
 	---[[
@@ -25,6 +27,7 @@ coroutine.wrap(function()
 end)();
 wait(1);
 
+--[[
 local function get_closest_item()
 	local temp = nil;
 	
@@ -58,7 +61,7 @@ end
 coroutine.wrap(function()
     pcall(function()
 		while wait() do
-			if item_farm and lp.Character and lp.Character.PrimaryPart then
+			if item_farm then
 				for i,v in pairs(ws.Drops.Active:GetChildren()) do
 					if lp.Character and lp.Character.PrimaryPart then
 						local closest = nil;
@@ -87,6 +90,31 @@ coroutine.wrap(function()
 							count = count + 1;
 						until not pp or not pp:IsDescendantOf(game) or count >= 10;
 						wait(.25);
+					end
+				end
+			end
+		end
+	end)
+end)();
+--]]
+coroutine.wrap(function()
+	pcall(function()
+		while wait() do
+			if item_farm then
+				for i,v in pairs(ws.Drops.Active:GetChildren()) do
+					if not table.find(item_blacklist, v.Name) and v:FindFirstChildOfClass("ProximityPrompt", true) then
+						local a = v:FindFirstChildOfClass("ProximityPrompt", true);
+						local b = v:FindFirstChildOfClass("Part") or v:FindFirstChildOfClass("MeshPart") or v:FindFirstChildOfClass("Handle") or v;
+						if b and a then
+							lp.Character.PrimaryPart.CFrame = b.CFrame;
+							wait(.25);
+							local count = 0;
+							repeat wait()
+								fireproximityprompt(a);
+								count = count + 1;
+							until not a or not a:IsDescendantOf(game) or count >= 10;
+							wait(.25);
+						end
 					end
 				end
 			end
