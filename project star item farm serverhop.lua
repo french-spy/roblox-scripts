@@ -8,6 +8,7 @@ if game.PlaceId == 7484251959 then
     local run_s = game:service"RunService";
     local ts = game:service"TweenService";
     
+    repeat wait() until lp;
     repeat wait() until lp.Character;
     repeat wait() until lp.Character:FindFirstChild("Humanoid");
     
