@@ -9,6 +9,7 @@ if game.PlaceId == 7484251959 then
     local ts = game:service"TweenService";
     
     repeat wait() until lp.Character;
+    repeat wait() until lp.Character:FindFirstChild("Humanoid");
     
 	local a = lp.Character.Humanoid:Clone();
 	a.Parent = lp.Character;
