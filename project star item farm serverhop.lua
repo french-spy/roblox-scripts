@@ -10,6 +10,8 @@ if game.PlaceId == 7484251959 then
     
     repeat wait() until lp.Character;
     
+	for i,v in pairs(rs.Detection:GetChildren()) do v:Destroy(); end
+	
     getgenv().item_farm = true;
     
     local PlaceID = game.PlaceId
@@ -103,6 +105,7 @@ if game.PlaceId == 7484251959 then
     end)();
     
 	wait(1);
+	--[[
 	local function get_tbl_size(tbl)
 		local size = 0;
 		for i,v in pairs(tbl) do
@@ -172,6 +175,25 @@ if game.PlaceId == 7484251959 then
 				until not pp or not pp:IsDescendantOf(game) or count >= 10;
 				wait(.25);
 			--end
+		end
+	end)
+	--]]
+	pcall(function()
+		for i,v in pairs(ws.Drops.Active:GetChildren()) do
+			if not table.find(item_blacklist, v.Name) and v:FindFirstChildOfClass("ProximityPrompt", true) then
+				local a = v:FindFirstChildOfClass("ProximityPrompt", true);
+				local b = v:FindFirstChildOfClass("Part") or v:FindFirstChildOfClass("MeshPart") or v:FindFirstChildOfClass("Handle") or v;
+				if b and a then
+					lp.Character.PrimaryPart.CFrame = b.CFrame;
+					wait(.25);
+					local count = 0;
+					repeat wait()
+						fireproximityprompt(a);
+						count = count + 1;
+					until not a or not a:IsDescendantOf(game) or count >= 10;
+					wait(.25);
+				end
+			end
 		end
 	end)
     wait(1);
