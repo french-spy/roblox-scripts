@@ -142,36 +142,38 @@ if game.PlaceId == 7484251959 then
 		return temp;
 	end
 	
-	for i,v in pairs(ws.Drops.Active:GetChildren()) do
-		if lp.Character and lp.Character.PrimaryPart then
-			local closest = nil;
-			repeat wait()
-				closest = get_closest_item();
-			until closest;
-			
-			local part = closest:FindFirstChildOfClass("Part") or closest:FindFirstChildOfClass("MeshPart") or closest:FindFirstChildOfClass("Handle") or closest;
-			local pp = closest:FindFirstChildOfClass("ProximityPrompt", true);
-			local dist = (part.Position - lp.Character.PrimaryPart.Position).magnitude;
-			if dist <= dist_before_tp then
-				lp.Character.PrimaryPart.CFrame = part.CFrame;
-			else
-				local time = dist / speed;
-				local tween_info = TweenInfo.new(time, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
-				local tween = ts:Create(lp.Character.PrimaryPart, tween_info, {CFrame = part.CFrame});
-				tween:Play();
-				repeat wait() until (part.Position - lp.Character.PrimaryPart.Position).magnitude <= dist_before_tp;
-				tween:Cancel();
-				lp.Character.PrimaryPart.CFrame = part.CFrame;
-			end
-			wait(.25);
-			local count = 0;
-			repeat wait()
-				fireproximityprompt(pp);
-				count = count + 1;
-			until not pp or not pp:IsDescendantOf(game) or count >= 10;
-			wait(.25);
+	pcall(function()
+		for i,v in pairs(ws.Drops.Active:GetChildren()) do
+			--if lp.Character and lp.Character.PrimaryPart then
+				local closest = nil;
+				repeat wait()
+					closest = get_closest_item();
+				until closest;
+				
+				local part = closest:FindFirstChildOfClass("Part") or closest:FindFirstChildOfClass("MeshPart") or closest:FindFirstChildOfClass("Handle") or closest;
+				local pp = closest:FindFirstChildOfClass("ProximityPrompt", true);
+				local dist = (part.Position - lp.Character.PrimaryPart.Position).magnitude;
+				if dist <= dist_before_tp then
+					lp.Character.PrimaryPart.CFrame = part.CFrame;
+				else
+					local time = dist / speed;
+					local tween_info = TweenInfo.new(time, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0);
+					local tween = ts:Create(lp.Character.PrimaryPart, tween_info, {CFrame = part.CFrame});
+					tween:Play();
+					repeat wait() until (part.Position - lp.Character.PrimaryPart.Position).magnitude <= dist_before_tp;
+					tween:Cancel();
+					lp.Character.PrimaryPart.CFrame = part.CFrame;
+				end
+				wait(.25);
+				local count = 0;
+				repeat wait()
+					fireproximityprompt(pp);
+					count = count + 1;
+				until not pp or not pp:IsDescendantOf(game) or count >= 10;
+				wait(.25);
+			--end
 		end
-	end
+	end)
     wait(1);
-    --Teleport();
+    Teleport();
 end
