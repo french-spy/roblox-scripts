@@ -11,7 +11,7 @@ coroutine.wrap(function()
         end
     end
 end)();
-wait(3.5);
+wait(5);
 local instance_names = {"Torso", "Head", "Right Arm", "Left Arm", "Left Leg", "Right Leg"};
 coroutine.wrap(function()
 	---[[
