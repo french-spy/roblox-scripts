@@ -7,15 +7,11 @@ if game.PlaceId == 7484251959 then
     local ws = workspace;
     local run_s = game:service"RunService";
     local ts = game:service"TweenService";
+    getgenv().hide_character = true;
+    getgenv().item_blacklist = {"Banana", "Orebag", "Cactus Juice", "Tire", "Cabbage"}; --Case sensitive, wont pickup the items listed
+    getgenv().item_farm = true;
     
-    repeat wait() until lp;
-    repeat wait() until lp.Character;
-    repeat wait() until lp.Character:FindFirstChild("Humanoid");
-    
-	local a = lp.Character.Humanoid:Clone();
-	a.Parent = lp.Character;
-	lp.Character.Humanoid:Destroy();
-	wait(1);
+    repeat wait() until lp.Character and lp.Character:FindFirstChild("Humanoid");
 	
     getgenv().item_farm = true;
     
@@ -91,7 +87,10 @@ if game.PlaceId == 7484251959 then
     
     local instance_names = {"Torso", "Head", "Right Arm", "Left Arm", "Left Leg", "Right Leg"};
     coroutine.wrap(function()
-        ---[[
+        local a = lp.Character.Humanoid:Clone();
+    	a.Parent = lp.Character;
+    	lp.Character.Humanoid:Destroy();
+         ---[[
 		run_s.RenderStepped:Connect(function()
             if item_farm and lp.Character and lp.Character:FindFirstChild("Humanoid") then
                 lp.Character.Humanoid:ChangeState(11);
