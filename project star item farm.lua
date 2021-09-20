@@ -4,7 +4,15 @@ local ws = workspace;
 local run_s = game:service"RunService";
 local ts = game:service"TweenService";
 
-lp:Kick("Script is patched");
+--lp:Kick("Script is patched");
+
+local old; old = hookmetamethod(game, "__namecall", function(self, ...)
+    if not checkcaller() and getnamecallmethod() == "Kick" then
+        return; 
+    end
+    return old(self, ...);
+end);
+wait(1);
 
 local a = lp.Character.Humanoid:Clone();
 a.Parent = lp.Character;
