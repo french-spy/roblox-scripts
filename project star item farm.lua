@@ -4,6 +4,8 @@ local ws = workspace;
 local run_s = game:service"RunService";
 local ts = game:service"TweenService";
 
+lp:Kick("Script is patched");
+
 local a = lp.Character.Humanoid:Clone();
 a.Parent = lp.Character;
 lp.Character.Humanoid:Destroy();
