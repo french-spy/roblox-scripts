@@ -14,13 +14,12 @@ local old; old = hookmetamethod(game, "__namecall", function(self, ...)
 end);
 wait(1);
 
-local a = lp.Character.Humanoid:Clone();
-a.Parent = lp.Character;
-lp.Character.Humanoid:Destroy();
-wait(1);
-
 local instance_names = {"Torso", "Head", "Right Arm", "Left Arm", "Left Leg", "Right Leg"};
 coroutine.wrap(function()
+	local a = lp.Character.Humanoid:Clone();
+	a.Parent = lp.Character;
+	lp.Character.Humanoid:Destroy();
+	wait(1);
 	---[[
 	run_s.RenderStepped:Connect(function()
 		if item_farm and lp.Character and lp.Character:FindFirstChild("Humanoid") then
