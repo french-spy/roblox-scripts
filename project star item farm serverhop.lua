@@ -8,7 +8,14 @@ if game.PlaceId == 7484251959 then
     local run_s = game:service"RunService";
     local ts = game:service"TweenService";
     
-	lp:Kick("Script is patched");
+	local old; old = hookmetamethod(game, "__namecall", function(self, ...)
+	    if not checkcaller() and getnamecallmethod() == "Kick" then
+		return; 
+	    end
+	    return old(self, ...);
+	end);
+	wait(1);
+	--lp:Kick("Script is patched");
 	
     repeat wait() until lp.Character
 	
