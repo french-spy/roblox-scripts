@@ -8,6 +8,8 @@ if game.PlaceId == 7484251959 then
     local run_s = game:service"RunService";
     local ts = game:service"TweenService";
     
+	lp:Kick("Script is patched");
+	
     repeat wait() until lp.Character
 	
     getgenv().item_farm = true;
