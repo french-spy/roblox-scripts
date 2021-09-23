@@ -192,7 +192,7 @@ if game.PlaceId == 7484251959 then
 		for i,v in pairs(ws.Drops.Active:GetChildren()) do
 			if not table.find(item_blacklist, v.Name) and v:FindFirstChildOfClass("ProximityPrompt", true) then
 				local a = v:FindFirstChildOfClass("ProximityPrompt", true);
-				local b = v:FindFirstChildOfClass("Part") or v:FindFirstChildOfClass("MeshPart") or v:FindFirstChildOfClass("Handle") or v;
+				local b = v:FindFirstChildOfClass("Part", true) or v:FindFirstChildOfClass("MeshPart", true) or v:FindFirstChildOfClass("Handle", true) or v;
 				if b and a then
 					lp.Character.PrimaryPart.CFrame = b.CFrame;
 					wait(.25);
