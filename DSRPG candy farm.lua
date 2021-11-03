@@ -8,7 +8,6 @@ local ws = workspace;
 local function hide_identity()
     lp.Character.FakeHead:Destroy();
     lp.Character.FakeTorso:Destroy();
-    lp.Character.BodyColors:Destroy();
     
     for i,v in pairs(lp.Character:GetChildren()) do
         if v:IsA("ShirtGraphic") or v:IsA("Shirt") or v:IsA("Pants") then
