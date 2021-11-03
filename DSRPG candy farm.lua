@@ -1,6 +1,3 @@
-getgenv().speed = 275;
-getgenv().candy_farm = true;
-
 coroutine.wrap(function () pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/HDTerebi/DSRPG2/master/DSRPG2%20Main%20Gui"))() end) end)();
 wait(3.5);
 
