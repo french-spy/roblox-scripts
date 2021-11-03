@@ -1,5 +1,5 @@
 coroutine.wrap(function () pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/HDTerebi/DSRPG2/master/DSRPG2%20Main%20Gui"))() end) end)();
-wait(3.5);
+wait(5);
 
 local lp = game:service"Players".LocalPlayer;
 local ts = game:service"TweenService";
