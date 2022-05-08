@@ -9,9 +9,11 @@ local lp = game:service"Players".LocalPlayer;
 local ws = workspace;
 local ts = game:service"TweenService";
 
+--[[
 repeat wait() until lp.PlayerGui:FindFirstChild("MenuGUI") and lp.PlayerGui.MenuGUI.Enabled
 firesignal(lp.PlayerGui.MenuGUI.Play.MouseButton1Click);
 task.wait(1);
+--]]
 
 local PlaceID = game.PlaceId
 local AllIDs = {}
