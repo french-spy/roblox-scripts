@@ -112,3 +112,5 @@ end)
 --end
 
 Teleport();
+
+syn.queue_on_teleport(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/Stand%20Upright%3A%20Rebooted%20item%20farm.lua"));
