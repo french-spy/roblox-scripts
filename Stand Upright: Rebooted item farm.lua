@@ -9,9 +9,12 @@ local lp = game:service"Players".LocalPlayer;
 local ws = workspace;
 local ts = game:service"TweenService";
 
-if lp.PlayerGui.MenuGUI.Enabled then
-    firesignal(lp.PlayerGui.MenuGUI.Play.MouseButton1Click);
-end 
+while task.wait() do
+    if lp.PlayerGui.MenuGUI.Enabled then
+        firesignal(lp.PlayerGui.MenuGUI.Play.MouseButton1Click);
+        break;
+    end 
+end
 task.wait(1);
 
 local PlaceID = game.PlaceId
