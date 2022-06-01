@@ -27,9 +27,9 @@ for i=1, choice do
         task.wait();
         vim:SendKeyEvent(false, Enum.KeyCode.Space, false, game);
         task.wait(3);
-    elseif b == "HJ" then
+    elseif b == "HJ" and a[i] ~= " " then
         for i2=1, #a[i] do
-            if i2 == #a[i] then
+            if i2 == #a[i] and (a[i]:sub(i2, i2) ~= " " or a[i]:sub(i2, i2) ~= "-") then
                 say:FireServer(a[i]:sub(i2, i2), "All");
                 task.wait();
                 vim:SendKeyEvent(true, Enum.KeyCode.Space, false, game);
