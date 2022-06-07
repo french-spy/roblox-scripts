@@ -31,18 +31,8 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Green
 local venyx = library.new("Venyx", 5013109572);
 
 local page = venyx:addPage("Test", 5012544693);
-local section1 = page:addSection("Section 1");
 local section2 = page:addSection("Section 2");
 local section3 = page:addSection("Section 3");
-
-section1:addToggle("Hide Name", nil, function(v) hide_name = v end);
-task.spawn(function()
-    while task.wait() do
-        if hide_name and lp.Character and lp.Character:FindFirstChild("Head") and lp.Character.Head:FindFirstChild("Nameplate") then
-            lp.Character.Head.Nameplate:Destroy();
-        end
-    end
-end)
 
 section3:addKeybind("Destroy GUI", Enum.KeyCode.RightAlt, function() game:service"CoreGui".Venyx:Destroy() end, function() end);
 
