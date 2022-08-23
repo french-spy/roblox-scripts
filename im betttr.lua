@@ -20,6 +20,11 @@ repeat task.wait()
     game:service"VirtualInputManager":SendMouseButtonEvent(500, 500, 0, true, game, 1)
     task.wait()
     game:service"VirtualInputManager":SendMouseButtonEvent(500, 500, 0, false, game, 1)
+    
+    game:service"VirtualInputManager":SendKeyEvent(true, Enum.KeyCode.Two, false, game)
+    task.wait()
+    game:service"VirtualInputManager":SendKeyEvent(false, Enum.KeyCode.Two, false, game)
+    
 until lp.PlayerGui.MainGui.SClearBox.Visible
 
 task.wait()
