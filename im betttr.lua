@@ -25,6 +25,13 @@ repeat task.wait()
     task.wait()
     game:service"VirtualInputManager":SendKeyEvent(false, Enum.KeyCode.Two, false, game)
     
+    game:service"VirtualInputManager":SendKeyEvent(true, Enum.KeyCode.One, false, game)
+    task.wait()
+    game:service"VirtualInputManager":SendKeyEvent(false, Enum.KeyCode.One, false, game)
+    
+    game:service"VirtualInputManager":SendKeyEvent(true, Enum.KeyCode.Three, false, game)
+    task.wait()
+    game:service"VirtualInputManager":SendKeyEvent(false, Enum.KeyCode.Three, false, game)
 until lp.PlayerGui.MainGui.SClearBox.Visible
 
 task.wait()
