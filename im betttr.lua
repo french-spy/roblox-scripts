@@ -7,9 +7,11 @@ local vu = game:service"VirtualUser"
 local a = lp.PlayerGui.MainGui:WaitForChild("TalkBox")
 repeat task.wait() until a.Visible
 
-repeat task.wait()
-    game:GetService("ReplicatedStorage").GameStorage.Remotes.TalkEvent:FireServer("Skip")
-until not lp.PlayerGui.MainGui.TalkBox.Visible
+if not getgenv().trial then
+    repeat task.wait()
+        game:GetService("ReplicatedStorage").GameStorage.Remotes.TalkEvent:FireServer("Skip")
+    until not lp.PlayerGui.MainGui.TalkBox.Visible
+end
 
 if not lp.Character then lp.CharacterAdded:Wait() end
 if not lp.Character:FindFirstChild("HumanoidRootPart") then lp.Character:WaitForChild("HumanoidRootPart") end
