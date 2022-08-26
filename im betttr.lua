@@ -36,5 +36,5 @@ repeat task.wait()
 until lp.PlayerGui.MainGui.SClearBox.Visible
 
 task.wait()
-
+--aa
 game:GetService("ReplicatedStorage").GameStorage.Remotes.StageEvents:FireServer("Replay")
