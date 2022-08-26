@@ -4,10 +4,9 @@ task.wait(3)
 local lp = game:service"Players".LocalPlayer
 local vu = game:service"VirtualUser"
 
-local a = lp.PlayerGui.MainGui:WaitForChild("TalkBox")
-repeat task.wait() until a.Visible
-
 if not getgenv().trial then
+    local a = lp.PlayerGui.MainGui:WaitForChild("TalkBox")
+    repeat task.wait() until a.Visible
     repeat task.wait()
         game:GetService("ReplicatedStorage").GameStorage.Remotes.TalkEvent:FireServer("Skip")
     until not lp.PlayerGui.MainGui.TalkBox.Visible
