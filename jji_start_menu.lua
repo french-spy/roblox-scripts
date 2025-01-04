@@ -11,6 +11,6 @@ pcall(function()
         for i,v in getconnections(lp.PlayerGui.Menu.MenuButtons.Play.MouseButton1Click) do
             v.Function()
         end
-    until not lp.PlayerGui.Menu.MenuButtons.Visible
+    until lp.PlayerGui.Menu.MenuButtons.Visible = false
 end)
     
