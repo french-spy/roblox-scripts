@@ -1,3 +1,5 @@
+task.wait(3)
+if not game.Loaded then game.Loaded:Wait()
 while not game do task.wait() end
 while not game:service"Players".LocalPlayer do task.wait() end
 local lp = game:service"Players".LocalPlayer
