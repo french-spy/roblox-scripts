@@ -682,7 +682,7 @@ task.spawn(function()
         task.wait()
     end
     for _, L_38_forvar2 in next, L_10_.Connections do
-        L_38_forvar2.Function = function() end()
+        L_38_forvar2.Function = function() end
     end
 end)
 
@@ -2204,7 +2204,7 @@ function L_10_:MakeWindow(L_124_arg1)
                 L_14_func(L_229_.InputBegan, function(L_239_arg1)
                     if L_239_arg1.UserInputType == Enum.UserInputType.MouseButton1 or L_239_arg1.UserInputType == Enum.UserInputType.Touch then
                         if L_236_ then
-                            L_236_.Function = function() end()
+                            L_236_.Function = function() end
                         end
                         L_236_ = L_14_func(L_4_.RenderStepped, function()
                             local L_240_ = math.clamp(L_6_.X - L_229_.AbsolutePosition.X, 0, L_229_.AbsoluteSize.X) / L_229_.AbsoluteSize.X
@@ -2218,14 +2218,14 @@ function L_10_:MakeWindow(L_124_arg1)
                 end)
                 L_14_func(L_229_.InputEnded, function(L_242_arg1)
                     if (L_242_arg1.UserInputType == Enum.UserInputType.MouseButton1 or L_242_arg1.UserInputType == Enum.UserInputType.Touch) and L_236_ then
-                        L_236_.Function = function() end()
+                        L_236_.Function = function() end
                     end
                 end)
                 local L_237_
                 L_14_func(L_230_.InputBegan, function(L_243_arg1)
                     if L_243_arg1.UserInputType == Enum.UserInputType.MouseButton1 or L_243_arg1.UserInputType == Enum.UserInputType.Touch then
                         if L_237_ then
-                            L_237_.Function = function() end()
+                            L_237_.Function = function() end
                         end
                         L_237_ = L_14_func(L_4_.RenderStepped, function()
                             local L_244_ = math.clamp(L_6_.Y - L_230_.AbsolutePosition.Y, 0, L_230_.AbsoluteSize.Y) / L_230_.AbsoluteSize.Y
@@ -2237,7 +2237,7 @@ function L_10_:MakeWindow(L_124_arg1)
                 end)
                 L_14_func(L_230_.InputEnded, function(L_245_arg1)
                     if (L_245_arg1.UserInputType == Enum.UserInputType.MouseButton1 or L_245_arg1.UserInputType == Enum.UserInputType.Touch) and L_237_ then
-                        L_237_.Function = function() end()
+                        L_237_.Function = function() end
                     end
                 end)
                 L_226_:Set(L_226_.Value)
