@@ -1,3 +1,7 @@
+
+--if not game:IsLoaded() then game.Loaded:Wait() end
+
+
 local Services = setmetatable({}, {__index = function(Self, Index)
     return game:GetService(Index)
     end})
@@ -455,7 +459,7 @@ local Services = setmetatable({}, {__index = function(Self, Index)
     
     local Tabs = Library.Tabs;
     local Sections = Library.sections;
-    Library.__index = Library
+    
     Tabs.__index = Library.Tabs
     Sections.__index = Library.sections
     
@@ -465,30 +469,11 @@ local Services = setmetatable({}, {__index = function(Self, Index)
     window.Title = Utility:GetType(window.Title, ".gg/Dracohub", "string")
     window.Tabs = Utility:GetType(window.Tabs, {}, "table")
     
-    local game = cloneref(game)
-    local CoreGui = cloneref(game:GetService("CoreGui"))
-    local Players = cloneref(game:GetService("Players"))
-    local Player = cloneref(Players.LocalPlayer)
-    local ReplicatedStorage = cloneref(game:service"ReplicatedStorage")
-    
-    getgenv().protect_gui = newcclosure(function(Gui)
-        if Gui and type(Gui) == "userdata" then
-            local Gui2 = cloneref(Gui)
-            if get_hidden_gui or gethui then
-                local Hid = get_hidden_gui or gethui
-                Gui2.Parent = Hid()
-            end
-        end
-    end)
-
     local dacroui = Utility:Render("ScreenGui",{
     Name = "dacroui",
     ZIndexBehavior = Enum.ZIndexBehavior.Global,
     Parent = gethui()
     })
-
-    protect_gui(dacroui)
-
     local MainFrame = Utility:Render("Frame",{
     Name = "MainFrame",
     BackgroundTransparency = 0.3499999940395355,
@@ -811,7 +796,6 @@ local Services = setmetatable({}, {__index = function(Self, Index)
     end;
     end;
     end)
-    Tab.firstsubtab = true
     Tab.Side = {Left = Left,Right=Right} 
     self.Tabs[#self.Tabs + 1] = Tab
     return setmetatable(Tab, Library.Tabs)
@@ -2050,7 +2034,7 @@ local Services = setmetatable({}, {__index = function(Self, Index)
     })
     
     
-    Utility:Signal(buttondetector.MouseButton1Down,function() Utility.ripple(ButtonContainer,ButtonContainer.X,ButtonContainer.Y)
+    Utility:Signal(buttondetector.MouseButton1Down,function() Utility.ripple(ButtonContainer,ButtonContainer.Position.X,ButtonContainer.Position.Y)
      Button.Callback()
     
     end)
@@ -2147,16 +2131,5 @@ local Services = setmetatable({}, {__index = function(Self, Index)
     Input.Default = Input.Default
     return Input
     end
-
-    return Library()
-    Utility:UpdateObject(inputtitle, "TextColor3","Text_dark")
-    Input.Default = textinputbox.Text
     
-    end)
-    
-    Library.Elements[#Library.Elements + 1] = Input
-    Input.Default = Input.Default
-    return Input
-    end
-
     return Library
