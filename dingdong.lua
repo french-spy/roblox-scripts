@@ -651,10 +651,10 @@ enablelogoanimation = false
 Library = nil
 end
 
-
+window.firsttab = true
 return setmetatable(window,Library)
 end
-firsttab = true
+
 function Library:Tab(properties)
 local properties = properties or {}
 local Tab = Utility:GetType(properties, {}, "table", false)
@@ -769,7 +769,7 @@ Parent = Right
 })
 function Tab:Open(value)
 task.spawn(function()
-Tab.Selected = value
+self.Selected = value
 ts:Create(tabFrame,TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {BackgroundTransparency = value and 0.4 or 1}):Play()
 ts:Create(Tabicon,TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {ImageColor3 = value and Utility.Theme.Accent or Utility.Theme.Tab_unselected}):Play()
 ts:Create(Tabtitle, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextColor3 = value and Utility.Theme.Text_light or Utility.Theme.Text_dark}):Play()
@@ -780,8 +780,8 @@ Page.Visible = value
 
 end)
 end
-if firsttab then
-firsttab = false
+if self.firsttab then
+self.firsttab = false
 Tab:Open(true)
 
 end
